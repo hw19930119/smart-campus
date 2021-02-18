@@ -1,0 +1,60 @@
+.btn-icon {
+    position: relative;
+    width: 50px;
+    margin-bottom: 0;
+    padding: 12px 0px 0 6px;
+    font-size: 25px;
+    font-family: "Microsoft YaHei";
+    color: #666;
+    font-weight: normal;
+}
+
+.noBorder {
+    border-bottom: 0px solid #ddd;
+}
+
+.right_button {
+    float: right;
+
+}
+.span_left {
+    width: 85%;
+    float: left;
+}
+.span_left_text {
+    float: left;
+    font-size: 13px;
+}
+
+.myUploadBtn {
+    margin-top: 5px;
+}
+
+.myTemplate {
+    position: relative;
+    top: 12px;
+    left: 10px;
+}
+
+.myTemplate2 {
+    position: relative;
+    top: 1px;
+    left: 10px;
+}
+
+.correct{
+    font-size: 22px;
+    color: #0b8;
+    top: 10px;
+    position: relative;
+    left:6px;
+}
+.correctfront{
+    font-size: 10px;
+    color: #0b8;
+    top: 10px;
+    position: relative;
+}
+
+
+

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ @(#) CategoryConfigMapper.xml
+  ~ 版权声明 厦门畅享信息技术有限公司, 版权所有 违者必究
+  ~
+  ~ <br> Copyright:  Copyright (c) 2020
+  ~ <br> Company:厦门畅享信息技术有限公司
+  ~ <br> @author Administrator
+  ~ <br> 2020-07-30 12:06:06
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sunsharing.smartcampus.mapper.filed.CategoryConfigMapper">
+
+    <resultMap id="categoryConfigMap" type="com.sunsharing.smartcampus.model.vo.filed.CategoryConfigDto">
+        <result column="ID" jdbcType="VARCHAR" property="key"/>
+        <result column="PARENT_ID" jdbcType="VARCHAR" property="parentId"/>
+        <result column="CATEGORY_NAME" jdbcType="VARCHAR" property="title"/>
+        <result column="CATEGORY_ORDER" jdbcType="VARCHAR" property="categoryOrder"/>
+        <result column="CATEGORY_TYPE" jdbcType="VARCHAR" property="categoryType"/>
+        <result column="TEMPLATE_ID" jdbcType="VARCHAR" property="templateId"/>
+        <result column="SCORE" jdbcType="VARCHAR" property="score"/>
+        <result column="TEMPLATE_NAME" jdbcType="VARCHAR" property="templateName"/>
+        <result column="ZP_SCORE" jdbcType="VARCHAR" property="zpScore"/>
+        <result column="STATE" jdbcType="VARCHAR" property="state"/>
+    </resultMap>
+
+    <select id="selectCategoryById" resultMap="categoryConfigMap">
+        select * FROM T_CATEGORY_CONFIG WHERE id=#{key,jdbcType=VARCHAR}
+    </select>
+    <select id="seelctAllCategory" resultMap="categoryConfigMap">
+        SELECT
+        B.TEMPLATE_NAME,A.ID,A.PARENT_ID,A.CATEGORY_NAME,A.CATEGORY_ORDER,A.CATEGORY_TYPE,A.TEMPLATE_ID,A.SCORE
+        FROM
+        T_CATEGORY_CONFIG A ,T_ZHXY_TEMPLATE B
+        WHERE A.DEL='0' AND A.TEMPLATE_ID=B.TEMPLATE_NO
+        AND B.TEMPLATE_NO=#{templateId,jdbcType=VARCHAR}
+        <if test="categoryIdList != null and categoryIdList.size()>0">
+            AND A.ID in
+            <foreach collection="categoryIdList" item="item" separator="," open="(" close=")">
+                #{item, jdbcType=VARCHAR}
+            </foreach>
+        </if>
+        ORDER BY A.CREATE_TIME
+    </select>
+    <select id="getCategoryByTemplateId" resultMap="categoryConfigMap">
+        SELECT
+       ID,PARENT_ID,CATEGORY_NAME,TEMPLATE_ID
+        FROM
+        T_CATEGORY_CONFIG WHERE DEL='0'
+        AND TEMPLATE_ID=#{templateId,jdbcType=VARCHAR}
+        ORDER BY CREATE_TIME ASC
+    </select>
+    <select id="selectByTemplateId" resultType="com.sunsharing.smartcampus.model.pojo.filed.CategoryConfig">
+        SELECT
+        A.ID `KEY`,A.PARENT_ID,A.CATEGORY_NAME TITLE,A.CATEGORY_ORDER,A.CATEGORY_TYPE,A.TEMPLATE_ID,A.SCORE,A.STATE,A.CREATE_TIME
+        FROM
+        T_CATEGORY_CONFIG A WHERE A.TEMPLATE_ID=#{templateId,jdbcType=VARCHAR} AND DEL='0'
+    </select>
+
+    <insert id="addCategory">
+        INSERT INTO T_CATEGORY_CONFIG (ID,PARENT_ID,CATEGORY_NAME,SCORE,DEL,CATEGORY_TYPE,TEMPLATE_ID)
+        VALUES (#{key,jdbcType=VARCHAR},#{categoryId,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},
+        #{score,jdbcType=VARCHAR},"0",#{type,jdbcType=VARCHAR},#{templateId,jdbcType=VARCHAR});
+    </insert>
+    <insert id="insertBatch">
+        INSERT INTO T_CATEGORY_CONFIG (ID,PARENT_ID,CATEGORY_NAME,CATEGORY_ORDER,SCORE,CATEGORY_TYPE,TEMPLATE_ID,CREATE_TIME)
+        values
+        <foreach collection="configList" item="config" separator=",">
+            (
+            #{config.key,jdbcType=VARCHAR},
+            #{config.parentId,jdbcType=VARCHAR},
+            #{config.title,jdbcType=VARCHAR},
+            #{config.categoryOrder,jdbcType=VARCHAR},
+            #{config.score},
+            #{config.categoryType,jdbcType=VARCHAR},
+            #{config.templateId,jdbcType=VARCHAR},
+            #{config.createTime,jdbcType=VARCHAR}
+            )
+        </foreach>
+    </insert>
+
+
+    <update id="updateCategory">
+        update T_CATEGORY_CONFIG
+        <set>
+            <if test="name != null">
+                CATEGORY_NAME = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="score != null">
+                SCORE = #{score,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ID = #{categoryId,jdbcType=VARCHAR}
+    </update>
+    <delete id="deleteById">
+        delete from T_CATEGORY_CONFIG where ID=#{key,jdbcType=VARCHAR}
+    </delete>
+    <delete id="delById">
+        update T_CATEGORY_CONFIG set DEL='1' where TEMPLATE_ID=#{templateId,jdbcType=VARCHAR}
+    </delete>
+    <update id="updateCategoryStateById">
+        UPDATE T_CATEGORY_CONFIG SET STATE="0",ZP_SCORE=#{zpScore,jdbcType=VARCHAR} WHERE ID=#{id,jdbcType=VARCHAR}
+    </update>
+    <update id="updateCategoryState">
+        UPDATE T_CATEGORY_CONFIG SET STATE="1" WHERE ID=#{categoryId,jdbcType=VARCHAR}
+    </update>
+</mapper>

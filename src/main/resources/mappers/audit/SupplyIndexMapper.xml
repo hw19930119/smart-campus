@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunsharing.smartcampus.mapper.audit.SupplyIndexMapper">
+    <update id="updateIndexState">
+      UPDATE T_SCF_SUPPLY_INDEX
+      SET STATUS=#{status}
+      WHERE BUSSINESS_KEY = #{businessKey}
+      AND MAIN_INDEX_ID=#{mainIndexId}
+    </update>
+
+    <delete id="delIndexByBusinessKey">
+      DELETE FROM T_SCF_SUPPLY_INDEX
+      WHERE BUSSINESS_KEY = #{businessKey}
+    </delete>
+
+    <select id="queryFinalIndexScoreMap" resultType="com.sunsharing.smartcampus.model.vo.audit.ScoreVo">
+        SELECT fv.CATEGORY_ID,
+                (CASE
+                WHEN score.GIVE_BACK IS NULL THEN 'look'
+                ELSE score.GIVE_BACK END) GIVE_BACK
+        FROM
+            T_FIELD_VALUE fv
+        LEFT JOIN
+        (   SELECT
+                si.BUSSINESS_KEY,
+                si.MAIN_INDEX_ID CATEGORY_ID,
+                (CASE
+                WHEN si.STATUS IS NULL THEN 'giveback'
+                WHEN si.STATUS='0' THEN 'giveback'
+                WHEN si.STATUS='1' THEN 'givebackChanged'
+                ELSE 'giveback' END) GIVE_BACK
+            FROM
+                T_SCF_SUPPLY_INDEX si
+            WHERE si.BUSSINESS_KEY=#{businessKey}
+        ) score on score.CATEGORY_ID=fv.CATEGORY_ID
+    </select>
+    <select id="queryFinalIndexScoreMapForOnlyGiveBack" resultType="com.sunsharing.smartcampus.model.vo.audit.ScoreVo">
+        SELECT fv.CATEGORY_ID,
+                (CASE
+                WHEN score.GIVE_BACK IS NULL THEN 'look'
+                ELSE score.GIVE_BACK END) GIVE_BACK
+        FROM
+            T_FIELD_VALUE fv
+            LEFT JOIN
+            (
+                SELECT
+                    si.BUSSINESS_KEY,
+                    si.MAIN_INDEX_ID CATEGORY_ID,
+                    (CASE
+                    WHEN si.STATUS IS NULL THEN 'giveback'
+                    WHEN si.STATUS='0' THEN 'giveback'
+                    WHEN si.STATUS='1' THEN 'givebackChanged'
+                    ELSE 'giveback' END) GIVE_BACK
+                FROM
+                    T_SCF_SUPPLY_INDEX si
+                WHERE si.BUSSINESS_KEY=#{businessKey}
+            ) score on score.CATEGORY_ID=fv.CATEGORY_ID
+    </select>
+</mapper>

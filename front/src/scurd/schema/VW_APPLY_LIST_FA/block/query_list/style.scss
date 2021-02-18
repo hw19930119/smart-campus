@@ -1,0 +1,64 @@
+/*
+ * @(#) style.scss
+ * 版权声明 厦门畅享信息技术有限公司, 版权所有 违者必究
+ *
+ * <br> Copyright:  Copyright (c) 2019
+ * <br> Company:厦门畅享信息技术有限公司
+ * <br> @author liuxia
+ * <br> 2020/8/4 19:31
+ */
+:global{
+  .query-VW_APPLY_LIST_FA{
+    .breadcrumb{
+      display: none;
+    }
+    .form-search-wrap{
+      .query_item_STATE{
+        .Select.select-width{
+          width: auto!important;
+          min-width: 150px;
+        }
+      }
+      .query_item_COMMIT_TIME{
+        .datetime-box-multiple{
+          width: auto!important;
+          input[type='text']{
+            width: 15em!important;
+          }
+        }
+
+      }
+    }
+    .panel-head{
+      .right-item{
+        .btn.btn-default.ui-btn-default{
+          background: #09d !important;
+          border-color: #09d !important;
+          width: 85px;
+          height: 32px;
+          font-size: 14px;
+          color: #fff;
+          &:hover{
+            background: #08c;
+            color: #fff!important;
+          }
+          .fa{
+            display: none;
+          }
+        }
+      }
+    }
+    .status-span{
+      min-width: 48px;
+    }
+  }
+  #js-tableVW_APPLY_LIST_FA{
+    .share-table{
+      tr{
+        th:nth-last-child(2),td:nth-last-child(2){
+          display: none;
+        }
+      }
+    }
+  }
+}

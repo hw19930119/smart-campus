@@ -1,0 +1,170 @@
+/*!
+ * @(#) style.scss
+ * 版权声明 厦门畅享信息技术有限公司, 版权所有 违者必究
+ *
+ * <br> Copyright:  Copyright (c) 2020
+ * <br> Company:厦门畅享信息技术有限公司
+ * <br> @author Administrator
+ * <br> 2020-11-02 11:47:12
+ */
+
+:global {
+  .evaluation-detail-box-expert {
+    .change-label{
+      color: #777;
+      font-weight: normal;
+      margin-right: 15px;
+      cursor: pointer;
+      .si{
+        margin-left: 3px;
+      }
+    }
+    .evaluation-detail-expert {
+      ul, li {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      max-height: 100%;
+      .columns {
+        border: 1px solid #ebeced;
+        border-bottom: none;
+        display: flex;
+        align-items: center;
+        li {
+          text-align: center;
+          border-right: 1px solid #ebeced;
+          height:38px;
+          line-height: 38px;
+          background: #f8f8f9;
+          font-weight: normal;
+          color: #333333;
+          &:nth-child(1) {
+            width: 150px;
+          }
+          &:nth-child(2) {
+           flex:1;
+          }
+          &:nth-child(3) {
+            width: 100px;
+          }
+          &:nth-child(4) {
+            width: 500px;
+          }
+          &:last-child {
+            border-right: none;
+          }
+        }
+      }
+      .table-box {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        &.table-box-1 {
+          > li {
+            border-bottom: 1px solid #ebeced;
+          }
+        }
+        &.table-box-2 {
+          position: relative;
+          padding-right: 100px;
+          > li {
+            position: relative;
+            border-bottom: 1px solid #ebeced;
+            &:last-child {
+              border-bottom: none;
+            }
+          }
+        }
+        &.expert-box{
+          width: 100px;
+          flex: none;
+          li{
+            display: flex;
+            border-bottom: 1px solid #ebeced;
+            &:last-child {
+              border-bottom: none;
+            }
+          }
+
+
+        }
+        &.only-one-child{
+          >li{
+            &:first-child {
+              min-height: 100%;
+            }
+          }
+        }
+        &.table-content {
+          border: 1px solid #ebeced;
+          border-bottom: none;
+          overflow: hidden;
+        }
+        li {
+          display: flex;
+          flex-direction: row;
+          align-items: stretch;
+          span {
+            padding: 10px;
+            line-height: 1.2;
+          }
+        }
+        .title-1 {
+          width: 150px;
+          border-bottom: 1px solid #ebeced;
+          border-right: 1px solid #ebeced;
+
+        }
+        .title-2 {
+          flex:1;
+          &:last-child {
+            border-bottom: none;
+          }
+
+        }
+        .title-3 {
+          width: 180px;
+        }
+        .title-4 {
+          flex: 1;
+          //border-right:1px solid rgba(0,0,0,.8);
+          &:nth-last-of-type(1) {
+            border-bottom: none;
+          }
+        }
+        .title-2, .title-3 {
+          border-right: 1px solid #ebeced;
+        }
+        .no-content {
+          flex: 1;
+        }
+      }
+      .experts{
+        width:99px;
+        text-align: center;
+        &.experts-detail{
+          width:200px;
+        }
+      }
+
+      .experts-context{
+        width:500px;
+        border-left:1px solid #ebeced;
+      }
+      &.expert-detail{
+        .columns{
+          li{
+            &:nth-child(3) {
+              width: 200px;
+            }
+
+          }
+        }
+        .table-box.expert-box{
+          width:200px;
+        }
+      }
+    }
+  }
+}

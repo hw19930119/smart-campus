@@ -1,0 +1,120 @@
+
+.container {
+    :global {
+        .btn-default {
+            background-color: #fff;
+        }
+    }
+}
+
+.addBtn {
+    color: #09d;
+    cursor: pointer;
+}
+
+.sort {
+    padding: 20px 0px 60px 20px;
+    width: 240px;
+    background-color: #f7f8f9;
+}
+
+.btn {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 88px;
+    height: 20px;
+    line-height: 18px;
+    margin-right: 20px;
+    margin-top: 12px;
+}
+
+.filterBody {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    padding: 20px 20px;
+    border: 1px solid #ebeced;
+}
+
+.sortTitle {
+    color: #555;
+    font-weight: bolder;
+    margin-bottom: 0;
+}
+
+.sort,
+.filterBox {
+    display: table-cell;
+    border: 1px solid #ebeced;
+}
+
+.fieldName {
+    display: inline-block;
+    width: 305px;
+}
+
+.filterBox {
+    :global {
+        .form-table > tbody > tr > th {
+            background-color: #fff;
+            border: none;
+            width: 86px;
+        }
+        .form-table > tbody > tr > td {
+            border: none;
+        }
+        .labelItem {
+            padding: 16px 15px 0 20px !important;
+            text-align: left !important;
+            width: auto !important;
+        }
+        .sub-item {
+            padding-left: 0 !important;
+        }
+    }
+}
+
+.searchBtn {
+    width: 72px;
+}
+
+.selectData {
+    margin-top: 4px;
+    margin-left: 0 !important;
+    margin-right: 1em !important;
+    float: left;
+    padding: 8px 8px 8px 4px;
+    border: 1px solid #ebeced;
+    :global {
+        .si-com_closethin:before {
+            margin-left: 6px;
+            color: #a4a5a9;
+            vertical-align: baseline;
+            cursor: pointer;
+        }
+        .si-com_sswj1:before {
+            display: none;
+        }
+    }
+}
+
+.label {
+    color: #74767a;
+}
+
+.checkboxGroup {
+    :global {
+        .checkBox {
+            margin-left: 0 !important;
+        }
+    }
+}
+
+.renderLabel :global {
+    .si-com_sswj1:before {
+        color: #0099dd;
+        padding-left: 6px;
+        vertical-align: baseline;
+        font-size: 14px;
+    }
+}

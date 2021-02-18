@@ -1,0 +1,68 @@
+/*!
+ * @(#) FileUpdata.scss
+ * 版权声明 厦门畅享信息技术有限公司, 版权所有 违者必究
+ *
+ * <br> Copyright:  Copyright (c) 2020
+ * <br> Company:厦门畅享信息技术有限公司
+ * <br> @author lihui
+ * <br> 2020-08-10 15:53:46
+ */
+@import "../../../assets/sass/base";
+:global{
+  .file-update{
+    .input-box{
+      position: relative;
+      height: 33px;
+      >div{
+        position: absolute;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        span{
+          display: inline-block;
+          padding-left: 8px;
+          font-size: 14px;
+        }
+      }
+      input{
+        position: absolute;
+        z-index: 10;
+        opacity: 0;
+        display: inline-block;
+        height: 33px;
+        width:100px;
+      }
+    }
+    .file-box{
+      border: $text-border-color;
+      border-radius: 5px;
+      padding:4px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      margin-bottom: 10px;
+      >div{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        .hidden-name{
+          width:350px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+      .svg-type{
+        padding-right: 10px;
+      }
+      .remove{
+        display: flex;
+        align-items: flex-start;
+        float: right;
+        svg{
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

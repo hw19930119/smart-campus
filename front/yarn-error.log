@@ -1,0 +1,70 @@
+Arguments: 
+  D:\waresoft\nodejs\node.exe D:\waresoft\yarn\bin\yarn.js
+
+PATH: 
+  C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\ATI Technologies\ATI.ACE\Core-Static;C:\Program Files (x86)\AMD\ATI.ACE\Core-Static;C:\Program Files\Java\jdk1.8.0_152;D:\waresoft\svn\bin;D:\waresoft\Git\cmd;D:\waresoft\yarn\bin\;D:\waresoft\nodejs\;C:\Users\chenchen\AppData\Local\Microsoft\WindowsApps;C:\Users\chenchen\AppData\Local\Yarn\bin;C:\Users\chenchen\AppData\Roaming\npm
+
+Yarn version: 
+  1.22.4
+
+Node version: 
+  8.10.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/@share%2fdatagrid: Not found
+      at Request.params.callback [as _callback] (D:\waresoft\yarn\lib\cli.js:66096:18)
+      at Request.self.callback (D:\waresoft\yarn\lib\cli.js:140748:22)
+      at emitTwo (events.js:126:13)
+      at Request.emit (events.js:214:7)
+      at Request.<anonymous> (D:\waresoft\yarn\lib\cli.js:141720:10)
+      at emitOne (events.js:116:13)
+      at Request.emit (events.js:211:7)
+      at IncomingMessage.<anonymous> (D:\waresoft\yarn\lib\cli.js:141642:12)
+      at Object.onceWrapper (events.js:313:30)
+      at emitNone (events.js:111:20)
+
+npm manifest: 
+  {
+    "name": "sunsharing-scurd-mobile",
+    "version": "1.0.1",
+    "scripts": {
+      "start": "sharekit server",
+      "build": "sharekit build",
+      "build-analyze": "cross-env NODE_ENV=production sharekit build --analyze",
+      "lint": "eslint --ext .js src > eslintErrorLog.txt"
+    },
+    "devDependencies": {
+      "@yo/eslint-config-sunsharing": "^1.2.3",
+      "@yo/share-kit": "^0.14.0",
+      "babel-plugin-dva-hmr": "^0.3.2",
+      "babel-plugin-import": "^1.12.0",
+      "chalk": "1.1.3",
+      "cross-env": "^5.2.0",
+      "exports-loader": "^0.7.0",
+      "imports-loader": "^0.8.0"
+    },
+    "dependencies": {
+      "@share/datagrid": "^2.2.2",
+      "@share/scurd": "3.0.284",
+      "@share/shareui": "2.25.1",
+      "@share/ulynlist": "^6.0.3",
+      "antd": "^3.2.3",
+      "classnames": "^2.2.5",
+      "dva": "2.1.0",
+      "jquery": "^3.3.1",
+      "nprogress": "^0.2.0",
+      "react": "^16.8.6",
+      "react-custom-scrollbars": "^4.2.1",
+      "react-dom": "^16.8.6",
+      "reactcss": "^1.2.3"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

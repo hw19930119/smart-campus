@@ -1,0 +1,36 @@
+/*
+ * @(#) file_type.css
+ * 版权声明 厦门畅享信息技术有限公司, 版权所有 违者必究
+ *
+ * <br> Copyright:  Copyright (c) 2020
+ * <br> Company:厦门畅享信息技术有限公司
+ * <br> @author cxy
+ * <br> 2020-03-11 16:36:26
+ */
+
+.form th {
+    width: 10%;
+}
+
+.form th .labelItem {
+    padding: 0;
+}
+
+.form td {
+    width: 33%;
+}
+
+.form_group {
+    width: 50%;
+    display: inline-block;
+}
+
+.other_class {
+    width: 200px;
+    display: inline-flex;
+}
+
+.tip_class {
+    padding-left: 20px;
+    display: contents;
+}

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunsharing.smartcampus.mapper.apply.TzhxyJcssMapper">
+    <sql id="Base_Column_List">
+    JCSS_ID, DECLARE_ID, WL_JRFS, WL_KDM, WL_FGFW, WL_ZX, ZD_TSGRDN, ZD_BJB, ZD_PBDN,
+    ZD_DZSB, ZD_QT, ZD_JSY, ZD_XSY, GN_DMTJS, GN_JSJJS, GN_SZHSYS, GN_SZHTYS, GN_DGNS,
+    GN_DZYNS, XT_MHGL, XT_SJGL, XT_KFYJR, RJ_JYGLXT, RJ_JYYYJGLXT, RJ_XXGLXT, RJ_SSCZGLXT,
+    RJ_JYPT, RJ_JXHTPT, ZY_SZTS, ZY_XXKC, ZY_XXKC_NUM, ZY_XMKC, ZY_XMKC_NUM, ZY_GXHXXZY,
+    COMMIT_TIME, CREATE_TIME, CREATE_PERSON, UPDATE_TIME, UPDATE_PERSON, `STATE`, LAST_STATE,
+    PC_STATE, DEL
+  </sql>
+    <select id="selectVoByBusinessKey" parameterType="java.lang.String" resultType="com.sunsharing.smartcampus.model.vo.apply.JcssVo">
+        select
+        <include refid="Base_Column_List" />
+        from T_ZHXY_JCSS
+        where DECLARE_ID = #{businessKey,jdbcType=VARCHAR}
+    </select>
+</mapper>
+
+

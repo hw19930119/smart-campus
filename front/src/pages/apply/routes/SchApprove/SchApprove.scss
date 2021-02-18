@@ -1,0 +1,127 @@
+/*!
+ * @(#) SchApprove.scss
+ * 版权声明 厦门畅享信息技术有限公司, 版权所有 违者必究
+ *
+ * <br> Copyright:  Copyright (c) 2020
+ * <br> Company:厦门畅享信息技术有限公司
+ * <br> @author lihui
+ * <br> 2020-08-10 09:57:40
+ */
+//6B7ABE,
+//EbECED,
+@import "../../../../assets/sass/base";
+:global{
+  .sch-approve{
+    //padding: 40px 12px 0;
+    background: $gray-background;
+    //max-width: 1280px;
+    min-width:1024px;
+    max-width: 1382px;
+    margin: 20px auto;
+    .panel{
+      margin-bottom: 0 !important;
+      margin-top: 15px;
+    }
+    .com-submit{
+      svg{
+        display: block;
+        margin: auto;
+        //padding: 20px 0;
+        margin-bottom: 8px;
+      }
+      text-align: center;
+      font-size: 16px;
+      padding-top: 40px;
+      >div{
+        padding: 8px 0;
+      }
+    }
+    .from-box{
+      width: 50%;
+      margin: auto;
+      padding-top: 30px;
+      .form-Control{
+        padding:10px 100px 0 135px;
+      }
+      >div{
+        padding: 25px 0;
+        .label{
+          display: inline-block;
+          width: 20%;
+          color: rgba(0,0,0,0.75);
+          text-align: right;
+          font-size: 14px;
+          > em{
+            color: $color-red;
+            margin-right: 3px;
+            font-style: normal;
+            position: relative;
+            top:3px;
+          }
+        }
+        .select-box{
+          display: inline-block;
+          width: 65%;
+          vertical-align: middle;
+          .Select-control{
+            border-radius: 4px !important;
+          }
+        }
+        .select1-hide,.select2-hide,.select3-hide,.files-hide{
+          color: $red-background;
+          padding: 10px 0 0 140px;
+          display: none;
+        }
+        .show{
+          display: block;
+        }
+      }
+    }
+    .but-box{
+      width: 280px;
+      margin: auto;
+      padding:50px 0;
+      text-align: center;
+      .btn:last-child{
+        margin-left: 20px;
+      }
+    }
+    .but-box-submit{
+      justify-content: center;
+    }
+    .step{
+      background: #F7F8F9;
+      padding: 15px;
+      .progress-step-box{
+        width:45%;
+        margin: auto;
+        .step-val{
+          width: 35px;
+          height: 35px;
+          line-height: 35px;
+        }
+        .step-label{
+          font-size: 16px;
+        }
+        .stem-item.finish,.stem-item.active {
+          .step-line{
+            background-color: #6B7ABE !important;
+          }
+          .step-val{
+            background-color: #6B7ABE !important;
+          }
+          .step-label{
+            color: #6B7ABE !important;
+            right: 28px;
+          }
+        }
+        .stem-item:nth-child(2){
+          width: 100%;
+          .step-label{
+            right: -26px;
+          }
+        }
+      }
+    }
+  }
+}

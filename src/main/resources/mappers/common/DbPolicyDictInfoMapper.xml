@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  ~ @(#) DbPolicyDictInfoMapper.xml
+  ~ 版权声明 厦门畅享信息技术有限公司, 版权所有 违者必究
+  ~
+  ~ <br> Copyright:  Copyright (c) 2020
+  ~ <br> Company:厦门畅享信息技术有限公司
+  ~ <br> @author hanjb
+  ~ <br> 2020-07-21 19:42:27
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.sunsharing.smartcampus.mapper.common.DbPolicyDictInfoMapper">
+
+    <sql id="Base_Column_List">
+        DICT_ID,
+        CLASS_EN_NAME,
+        DICT_CODE,
+        DICT_NAME,
+        REMARK,
+        ZXBS,
+        SORT,
+        CREATE_TIME,
+        CREATE_USER_ID,
+        UPDATE_TIME,
+        UPDATE_USER_ID
+    </sql>
+
+
+    <select id="findMapList" parameterType="com.sunsharing.smartcampus.model.pojo.common.DictInfo" resultType="HashMap">
+        SELECT
+        A.DICT_CODE id,
+        A.DICT_NAME label
+        FROM T_POLICY_DICT_INFO A
+        WHERE A.ZXBS = '0'
+        <if test="classEnName != null and classEnName != '' ">
+            and UPPER(A.CLASS_EN_NAME) = UPPER(#{classEnName, jdbcType=VARCHAR})
+        </if>
+        <if test="dictCode != null and dictCode != '' ">
+            and UPPER(A.DICT_CODE) = UPPER(#{dictCode, jdbcType=VARCHAR})
+        </if>
+        ORDER BY A.SORT
+    </select>
+
+    <select id="findDataByClassEnNameAndDictCode" parameterType="com.sunsharing.smartcampus.model.pojo.common.DictInfo"
+            resultType="com.sunsharing.smartcampus.model.pojo.common.DictInfo">
+        SELECT * FROM T_POLICY_DICT_INFO WHERE ZXBS = '0' AND CLASS_EN_NAME = #{classEnName} AND DICT_CODE = #{dictCode}
+    </select>
+
+
+    <update id="updateStateById">
+        UPDATE T_POLICY_DICT_INFO
+        <if test="zxbs!=null and zxbs== 1">
+            set ZXBS ='0'
+        </if>
+
+        <if test="zxbs!=null and zxbs == 0">
+            set ZXBS ='1'
+        </if>
+        where DICT_ID=#{dictId}
+    </update>
+
+</mapper>
+

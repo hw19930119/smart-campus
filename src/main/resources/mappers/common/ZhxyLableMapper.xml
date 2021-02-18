@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ @(#) ZhxyLableMapper.xml
+  ~ 版权声明 厦门畅享信息技术有限公司, 版权所有 违者必究
+  ~
+  ~ <br> Copyright:  Copyright (c) 2020
+  ~ <br> Company:厦门畅享信息技术有限公司
+  ~ <br> @author Administrator
+  ~ <br> 2020-08-17 11:21:46
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunsharing.smartcampus.mapper.common.TzhxyLableMapper">
+
+    <select id="getLableByName" resultType="com.sunsharing.smartcampus.model.pojo.common.TLable">
+      SELECT * FROM T_ZHXY_LABLE T WHERE T.NAME =#{name,jdbcType=VARCHAR}
+    </select>
+    <insert id="addLable">
+        INSERT INTO T_ZHXY_LABLE (ID,NAME) VALUES (#{id,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR})
+    </insert>
+</mapper>

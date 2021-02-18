@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunsharing.smartcampus.mapper.common.TzhxyTemplateMapper">
+
+    <select id="selectTemplateByPcnoAndSchooltype" resultType="com.sunsharing.smartcampus.model.pojo.common.TzhxyTemplate">
+        SELECT * FROM T_ZHXY_TEMPLATE WHERE PC_ID=#{pcNo,jdbcType=VARCHAR} AND TEMPLATE_TYPE LIKE concat('%',#{schoolType,jdbcType=VARCHAR},'%') AND DEL='0'
+    </select>
+
+    <select id="selectByIdDiy" resultType="com.sunsharing.smartcampus.model.pojo.common.TzhxyTemplate">
+        SELECT TEMPLATE_NO,TEMPLATE_NAME,TEMPLATE_TYPE,REMARKS,PC_ID FROM T_ZHXY_TEMPLATE WHERE DEL = '0' AND TEMPLATE_NO= #{id,jdbcType=VARCHAR}
+    </select>
+    <select id="selectByPcId" resultType="com.sunsharing.smartcampus.model.pojo.common.TzhxyTemplate">
+        SELECT TEMPLATE_NO,TEMPLATE_NAME,TEMPLATE_TYPE,REMARKS,PC_ID FROM T_ZHXY_TEMPLATE WHERE DEL = '0' AND PC_ID= #{pcId,jdbcType=VARCHAR}
+    </select>
+    <delete id="delById">
+        update T_ZHXY_TEMPLATE set DEL='1' where TEMPLATE_NO=#{templateId,jdbcType=VARCHAR}
+    </delete>
+    <select id="selectByDeclarId" resultType="com.sunsharing.smartcampus.model.pojo.common.TzhxyTemplate">
+        SELECT
+            A.*
+        FROM
+            T_ZHXY_TEMPLATE A,
+            T_ZHXY_BASEINFO B
+        WHERE
+            A.PC_ID = B.PC_NO
+        AND B.DECLARE_ID = #{declarId,jdbcType=VARCHAR}
+        AND A.TEMPLATE_TYPE LIKE concat('%', B.SCHOOL_TYPE, '%')
+        AND A.DEL = '0'
+    </select>
+</mapper>

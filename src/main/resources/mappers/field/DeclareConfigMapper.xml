@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ @(#) DeclareConfigMapper.xml
+  ~ 版权声明 厦门畅享信息技术有限公司, 版权所有 违者必究
+  ~
+  ~ <br> Copyright:  Copyright (c) 2020
+  ~ <br> Company:厦门畅享信息技术有限公司
+  ~ <br> @author hanjb
+  ~ <br> 2020-07-22 19:21:42
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sunsharing.smartcampus.mapper.filed.DeclareConfigMapper">
+
+
+
+    <select id="findBasicFieldList" resultType="com.sunsharing.smartcampus.model.vo.filed.FieldConfigDto">
+        SELECT DISTINCT
+            A.*,
+            '3' as 'tabKey'
+        FROM
+            T_POLICY_CG_FIELD_CONFIG A ORDER BY A.CREATE_TIME
+    </select>
+</mapper>

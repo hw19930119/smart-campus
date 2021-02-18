@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ @(#) FieldConfigMapper.xml
+  ~ 版权声明 厦门畅享信息技术有限公司, 版权所有 违者必究
+  ~
+  ~ <br> Copyright:  Copyright (c) 2020
+  ~ <br> Company:厦门畅享信息技术有限公司
+  ~ <br> @author hanjb
+  ~ <br> 2020-07-21 11:48:38
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sunsharing.smartcampus.mapper.filed.FieldConfigMapper">
+
+    <select id="findFieldGroupConfigByFields" resultType="com.sunsharing.smartcampus.model.vo.filed.GroupFieldsConfigDto">
+        SELECT
+        fieldConfig.FIELD_CN_NAME name,
+        fieldConfig.FIELD_ID id,
+        groupField.UNIQUENESS_FLAG,
+        groupField.SHOW_NAME_FLAG,
+        groupField.SORT
+        FROM T_POLICY_CG_FIELD_GROUP_CONFIG groupField
+        LEFT JOIN T_POLICY_CG_FIELD_CONFIG fieldConfig ON fieldConfig.FIELD_ID = groupField.FIELD_ID
+        <foreach item="field" collection="fields" open=" where groupField.FIELD_ID  in (" separator="," close=")">
+            #{field}
+        </foreach>
+    </select>
+
+    <select id="getMaterialFieldInfo" resultType="com.sunsharing.smartcampus.model.vo.filed.MaterialFieldDto">
+        SELECT C.GROUP_CN_TITLE groupName,
+               C.GROUP_EN_TITLE groupId,
+               A.FIELD_CN_NAME fieldCnName,
+               A.FIELD_ID fieldId,
+               C.UPPER_GROUP_EN_TITLE upperGroupId
+        FROM T_POLICY_SP_COLL_INFO_CG_DETAIL A,T_POLICY_CG_FIELD_CONFIG B,T_POLICY_SP_COLL_INFO_CG_GROUP C
+        where A.POLICY_ID = #{policyId}
+              and A.FIELD_ID = B.FIELD_ID
+              and A.COLL_INFO_CG_GROUP_ID = C.COLL_INFO_CG_GROUP_ID
+              and B.FIELD_CONTROL in ('3','8')
+    </select>
+    <insert id="addField">
+        INSERT INTO T_POLICY_CG_FIELD_CONFIG (FIELD_ID,FIELD_CATEGORY,FIELD_CN_NAME,SCORE) VALUES (
+        #{key,jdbcType=VARCHAR},#{categoryId,jdbcType=VARCHAR},#{name,jdbcType=VARCHAR},#{score,jdbcType=VARCHAR}
+        )
+    </insert>
+    <select id="selectByConfig" resultType="com.sunsharing.smartcampus.model.pojo.filed.FieldConfig">
+        SELECT FIELD_ID,FIELD_CATEGORY,FIELD_CN_NAME,
+        FIELD_EN_NAME,FIELD_CONTROL,FIELD_REQUIRED,
+        PROMPT_MSG,FIELD_CONFIG_JSON,IN_STOCK_FLAG,SCORE,CREATE_TIME
+        FROM T_POLICY_CG_FIELD_CONFIG WHERE ZXBS='0'
+        <foreach item="config" collection="categoryConfigs" open=" AND FIELD_CATEGORY  in (" separator="," close=")">
+        #{config.key}
+        </foreach>
+    </select>
+    <insert id="insertBatch">
+        INSERT INTO T_POLICY_CG_FIELD_CONFIG (FIELD_ID,FIELD_CATEGORY,FIELD_CN_NAME,
+        FIELD_EN_NAME,FIELD_CONTROL,FIELD_REQUIRED,PROMPT_MSG,FIELD_CONFIG_JSON,IN_STOCK_FLAG,SCORE,CREATE_TIME)
+        values
+        <foreach collection="fieldConfigs" item="field" separator=",">
+            (
+            #{field.fieldId,jdbcType=VARCHAR},
+            #{field.fieldCategory,jdbcType=VARCHAR},
+            #{field.fieldCnName,jdbcType=VARCHAR},
+            #{field.fieldEnName,jdbcType=VARCHAR},
+            #{field.fieldControl,jdbcType=VARCHAR},
+            #{field.fieldRequired,jdbcType=VARCHAR},
+            #{field.promptMsg,jdbcType=VARCHAR},
+            #{field.fieldConfigJson,jdbcType=VARCHAR},
+            #{field.inStockFlag,jdbcType=VARCHAR},
+            #{field.score},
+            #{field.createTime}
+            )
+        </foreach>
+    </insert>
+    <delete id="deleteFieldById">
+        DELETE from T_POLICY_CG_FIELD_CONFIG WHERE FIELD_ID=#{key,jdbcType=VARCHAR}
+    </delete>
+    <select id="selectTemplateNameById" resultType="string">
+        SELECT TEMPLATE_NAME FROM T_ZHXY_TEMPLATE WHERE TEMPLATE_NO=#{templateId,jdbcType=VARCHAR}
+    </select>
+</mapper>

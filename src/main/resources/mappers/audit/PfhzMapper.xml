@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunsharing.smartcampus.mapper.audit.PfhzMapper">
+
+    <select id="queryPfhzList" resultType="com.sunsharing.smartcampus.model.vo.audit.PfhzVo">
+        SELECT
+            hz.HZ_ID, hz.BUSSINESS_KEY, hz.NODE_ID, hz.P_ID, hz.PF_ROLE, hz.PF_PERSON_ID, hz.PF_PERSON_NAME, hz.PF_PERSON_IDNUM, hz.PF_SUM, hz.CREATE_TIME, hz.UPDATE_TIME,
+            r.NAME roleName
+        FROM T_SCF_PFHZ hz
+        LEFT JOIN T_SC_ROLE r on r.ROLE_ID=hz.PF_ROLE
+        WHERE hz.BUSSINESS_KEY=#{bussinessKey,jdbcType=VARCHAR}
+        ORDER BY hz.CREATE_TIME ASC
+    </select>
+</mapper>

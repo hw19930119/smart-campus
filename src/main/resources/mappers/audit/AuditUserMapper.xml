@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunsharing.smartcampus.mapper.audit.AuditUserMapper">
+
+    <select id="getAuditUserVoByIdNum" resultType="com.sunsharing.smartcampus.model.vo.audit.AuditUserVo"
+            parameterType="java.lang.String">
+         SELECT
+             au.ID, au.NAME, au.ID_NUM, au.ROLE_ID, au.XZQH, au.CREATE_TIME, au.DEL,
+             role.CODE as roleCode,role.NAME as roleName,role.FILTER_DATA filterData
+         FROM T_SC_AUDIT_USER au
+         left join T_SC_ROLE role on role.ROLE_ID=au.ROLE_ID
+         WHERE (au.ID_NUM=#{idNum,jdbcType=VARCHAR} OR au.ID=#{userId,jdbcType=VARCHAR})
+         and au.del='0'
+    </select>
+
+    <select id="queryForAuditUserZj" resultType="com.sunsharing.smartcampus.model.pojo.audit.AuditUser">
+      SELECT
+        DISTINCT A.*
+      FROM T_SC_AUDIT_USER A,T_SC_ROLE B
+      WHERE A.ROLE_ID = B.ROLE_ID
+      AND B.`CODE` = #{role,jdbcType=VARCHAR}
+      AND A.DEL = '0'
+    </select>
+
+    <select id="queryCommentExperts" resultType="com.sunsharing.smartcampus.model.vo.comment.ExpertVo">
+        SELECT
+            A.ID AS userId,
+            A.NAME AS userName,
+            (SELECT
+                    COUNT(*)
+                FROM
+                    T_ZHXY_DPCONFIG C,
+                    T_ZHXY_COMMENT D
+                WHERE
+                    A.ID = C.EXPERT_ID
+                AND C.DP_ID = D.DP_ID
+                AND D.DEL = '0'
+                AND C.TEMPLATE_ID = #{templateId,jdbcType=VARCHAR}
+                AND C.DEL = '0') AS falg
+        FROM
+            T_SC_AUDIT_USER A,
+            T_SC_ROLE B
+        WHERE
+            A.ROLE_ID = B.ROLE_ID
+        AND B.`CODE` =  #{role,jdbcType=VARCHAR}
+        AND A.DEL = '0'
+    </select>
+</mapper>

@@ -1,0 +1,245 @@
+@import '../../../assets/sass/base';
+:global{
+    .apply-con .commit .panel{
+        margin-bottom: 15px!important;
+        .panel-body{
+            padding: 0!important;
+        }
+    }
+    .commit {
+        .rate-result-con{
+            padding:15px 0;
+            @include flex(column,center,center);
+            .rate-con{
+                svg{
+                    margin:0 2px;
+                }
+            }
+            p{
+                font-size: $font-size-large;
+                font-weight:600;
+                color: $color333;
+                margin:5px 0 0 0;
+            }
+        }
+        .panel-head{
+            height: 50px;
+            line-height: 48px;
+            font-weight: bold;
+            color: $color333;
+            padding-left: 20px;
+            .right-item{
+                cursor: pointer;
+                margin-top: 5px;
+                .label{
+                    padding: 4px 12px;
+                    margin-right: 15px;
+                    height: 30px;
+                }
+                &:before{
+                    display: none;
+                }
+                .change-label{
+                    color: $color777;
+                    font-weight: normal;
+                    margin-top: -3px;
+                    margin-right: 15px;
+                    .si{
+                        margin-left: 3px;
+                    }
+                }
+            }
+        }
+        .commit-table{
+            width: 100%;
+            tr{
+                height: 34px;
+                & > th, & > td{
+                    border: 1px solid #ebeced;
+                    height: 38px;
+                    color: $color333;
+                    text-align: left;
+                    &.td-bg{
+                        background: #f8f8f9;
+                        text-align: right;
+                        padding-right: 5px;
+                    }
+                    &.textLeft-td{
+                        padding-left: 20px;
+                        .checkbox,.radioBox{
+                            margin-right: 30px;
+                            label{
+                                cursor: default;
+                            }
+                        }
+                        .other-info{
+                            //margin-left: 20px;
+                            b{
+                                min-width: 200px;
+                                padding: 0 10px;
+                                font-weight: normal;
+                                display: inline-block;
+                                //height: 23px;
+                                border-bottom: 1px solid $color333;
+                            }
+                        }
+                    }
+                    .nums-con{
+                        padding: 7px 0;
+                        span{
+                            display: inline-block;
+                            margin-right: 50px;
+                            b{
+                                //padding: 0 5px;
+                                margin: 0 2px;
+                                font-weight: normal;
+                                display: inline-block;
+                                //height: 23px;
+                                //border-bottom: 1px solid $color333;
+                            }
+                        }
+                    }
+                    .num-span{
+                        display: inline-block;
+                        margin-right: 20px;
+                        b{
+                            margin: 0 5px;
+                            font-weight: normal;
+                            display: inline-block;
+                            width: 50px;
+                            text-align: center;
+                            //height: 23px;
+                            border-bottom: 1px solid $color333;
+                        }
+                    }
+                    .other-num-con{
+                        .checkbox:first-child{
+                            margin-right: 10px;
+                        }
+                    }
+                }
+
+            }
+            .other-tr{
+                > td{
+                    padding: 10px 0;
+                    .sub-table{
+                        width: 100%;
+                        tr > td,tr> th{
+                            text-align: center;
+                            border-left: none;
+                            border-right: none;
+                        }
+                        tr> th{
+                            background: #f8f8f9;
+                            font-weight: normal;
+                        }
+                    }
+                }
+
+            }
+        }
+        .basic-table{
+            .textLeft-td{
+                .customClass{
+                    width: 50px;
+                    &:nth-child(5){
+                        width: 100px;
+                    }
+                }
+            }
+        }
+        .jcss-table{
+            .textLeft-td{
+                .customClass{
+                    width: 214px;
+                    margin-right: 0!important;
+                }
+            }
+            .other-tr{
+                .textLeft-td{
+                    .customClass{
+                        width: 80px;
+                        margin-right: 0!important;
+                    }
+                }
+            }
+            .other-num-con{
+                .radioBox{
+                    margin-right: 0!important;
+                }
+            }
+        }
+
+
+    }
+
+    //申报端效果
+    .apply-commit{
+        //padding: 15px;
+        .commit-save-info{
+            padding: 15px 15px 0;
+            .checkbox{
+                margin-bottom: 10px;
+                label > span{
+                    color: $color-red;
+                }
+            }
+        }
+    }
+    .apply-time-con{
+        background: $color-fff;
+        margin-bottom: 15px;
+        .form-table{
+            .item-sm.item{
+                >th{
+                    background: none;
+                    border: none;
+                    .labelItem{
+                        padding: 15px;
+                        font-size: 14px;
+                        &:after {
+                            top: 14px;
+                        }
+                    }
+                }
+                > td{
+                    border: none;
+                    .input-hasTip{
+                        padding-left: 0!important;
+                        .textShow{
+                            padding-top: 15px;
+                            font-size: 14px;
+                        }
+                    }
+                }
+            }
+            .textShow{
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+        }
+    }
+    .back-reason-con{
+        background: #ffffcc;
+        padding: 10px 20px 15px;
+        margin-bottom: 15px;
+        .reason-title{
+            color: #333;
+            font-size: 15px;
+            margin-bottom: 10px;
+            .fa{
+                color: $color-red;
+                font-size: 24px;
+                margin-right: 5px;
+            }
+        }
+        & > div{
+            @include flex(row,flex-start,flex-start);
+            > span{
+                width: 100px;
+                text-align: right;
+            }
+        }
+    }
+}

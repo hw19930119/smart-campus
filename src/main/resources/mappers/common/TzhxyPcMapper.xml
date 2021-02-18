@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ @(#) TzhxyPcMapper.xml
+  ~ 版权声明 厦门畅享信息技术有限公司, 版权所有 违者必究
+  ~
+  ~ <br> Copyright:  Copyright (c) 2020
+  ~ <br> Company:厦门畅享信息技术有限公司
+  ~ <br> @author hanjb
+  ~ <br> 2020-08-03 20:17:01
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunsharing.smartcampus.mapper.common.TzhxyPcMapper">
+
+    <select id="queryNowAvailablePC" resultType="com.sunsharing.smartcampus.model.pojo.common.TzhxyPc">
+      SELECT * FROM T_ZHXY_PC WHERE STATE = #{state} ORDER BY UPDATE_TIME DESC LIMIT 1
+    </select>
+    <select id="selectDiyById" resultType="com.sunsharing.smartcampus.model.pojo.common.TzhxyPc">
+      SELECT PC_NO, PC_NAME FROM T_ZHXY_PC WHERE PC_NO = #{pcId}
+    </select>
+
+    <select id="selectAll" resultType="hashmap">
+      SELECT PC_NO id, PC_NAME label,date_format(CREATE_TIME,'%Y') years FROM T_ZHXY_PC WHERE DEL='0' AND STATE IN ('1','2') ORDER BY CREATE_TIME DESC,STATE ASC
+    </select>
+</mapper>

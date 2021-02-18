@@ -1,0 +1,58 @@
+:global{
+  #modal-iframeModalT_ZHXY_TEMPLATE_FA{
+    .modal-dialog{
+      height:90%;
+      .modal-content{
+        height:100%;
+      }
+    }
+    .modal-body{
+      height:84%!important;
+      .tree-con{
+        .ant-tree{
+          margin-top:0;
+        }
+      }
+      .Select:not(.Select-inline){
+        margin-left:0;
+      }
+      .ant-tree-node-content-wrapper{
+        width: 88%!important;
+      }
+      padding:0!important;
+      ::-webkit-scrollbar
+      {
+        width: 5px;
+        height: 5px;
+        background-color: rgba(208, 209, 212, 0.5);
+      }
+
+      /* 垂直滚动条的滑动块 */
+      ::-webkit-scrollbar-thumb:vertical {
+        -webkit-box-shadow: inset 0 0 6px rgba(153, 153, 153,1);
+        background-color: rgba(208, 209, 212, 0.5);
+      }
+      /* 横向滚动条的滑动块 */
+      ::-webkit-scrollbar-thumb:horizontal{
+        -webkit-box-shadow: inset 0 0 6px rgba(153, 153, 153,1);
+        background-color: rgba(208, 209, 212, 0.5);
+
+      }
+      * { touch-action: pan-y; }
+    }
+  }
+  @media screen and (max-width: 1366px) {
+    #modal-iframeModalT_ZHXY_TEMPLATE_FA {
+      .modal-body {
+        height: 80% !important;
+      }
+    }
+  }
+  @media screen and (max-width: 1166px) {
+    #modal-iframeModalT_ZHXY_TEMPLATE_FA {
+      .modal-body {
+        height: 78% !important;
+      }
+    }
+  }
+}

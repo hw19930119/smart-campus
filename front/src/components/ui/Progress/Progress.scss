@@ -1,0 +1,38 @@
+
+:global{
+    .progressBox{
+        background: #f7f8f9;
+        border-bottom: 1px solid #d0d1d4;
+        .progress-step-box{
+            .stem-item{
+                width:33.2%;
+                &:first-child{
+                    width: 40px;
+                }
+            }
+            .stem-item.active,
+            .stem-item.finish{
+                .step-val,
+                .step-line{
+                    background-color: #6b7abe;
+                }
+                .step-label{
+                    color: #6b7abe;
+                    font-size: 14px;
+                }
+            }
+            .stem-item.finish{
+                .step-label{
+                    color: #74767a;
+                }
+            }
+            .stem-item .step-val{
+                width: 35px;
+                height: 35px;
+                line-height: 35px;
+                top: -14px;
+                font-family: Arial;
+            }
+        }
+    }
+}

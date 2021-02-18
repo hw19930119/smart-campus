@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunsharing.smartcampus.mapper.audit.ProcInstMapper">
+
+    <!-- 撤销申报 -->
+    <delete id="clearAudit" parameterType="java.lang.String">
+        UPDATE T_ZHXY_BASEINFO SET STATE='8',LAST_STATE='8',COMMIT_TIME = NULL WHERE DECLARE_ID=#{bussinessKey,jdbcType=VARCHAR};
+        UPDATE T_ZHXY_JCSS SET STATE='8',LAST_STATE='8' WHERE DECLARE_ID=#{bussinessKey,jdbcType=VARCHAR};
+        DELETE FROM T_SCF_SUPPLY_INDEX WHERE BUSSINESS_KEY=#{bussinessKey,jdbcType=VARCHAR};
+        DELETE FROM T_SCF_SCORE WHERE BUSSINESS_KEY=#{bussinessKey,jdbcType=VARCHAR};
+        DELETE FROM T_SCF_PFHZ WHERE BUSSINESS_KEY=#{bussinessKey,jdbcType=VARCHAR};
+        DELETE FROM T_SCF_STAR_LEVEL WHERE BUSSINESS_KEY=#{bussinessKey,jdbcType=VARCHAR};
+        DELETE FROM T_SCF_PERSON_TODO_DONE WHERE PI_ID=(SELECT PI_ID FROM T_SCF_PROCINST WHERE BUSSINESS_KEY=#{bussinessKey,jdbcType=VARCHAR});
+        DELETE FROM T_SCF_NODE_PERSON WHERE PI_ID=(SELECT PI_ID FROM T_SCF_PROCINST WHERE BUSSINESS_KEY=#{bussinessKey,jdbcType=VARCHAR});
+        DELETE FROM T_SCF_TODO_DONE WHERE PI_ID=(SELECT PI_ID FROM T_SCF_PROCINST WHERE BUSSINESS_KEY=#{bussinessKey,jdbcType=VARCHAR});
+        DELETE FROM T_SCF_AUDIT_RECORD WHERE PI_ID=(SELECT PI_ID FROM T_SCF_PROCINST WHERE BUSSINESS_KEY=#{bussinessKey,jdbcType=VARCHAR});
+        DELETE FROM T_SCF_PROCINST WHERE BUSSINESS_KEY=#{bussinessKey,jdbcType=VARCHAR};
+    </delete>
+
+    <select id="queryProcessNodeList" resultType="com.sunsharing.smartcampus.model.vo.audit.PdNodeVo">
+        select *
+        from VW_PI_NODE_LIST piNodeList
+        where piNodeList.BUSSINESS_KEY=#{bussinessKey,jdbcType=VARCHAR}
+    </select>
+
+    <select id="countDoneByRole" resultType="int">
+        SELECT COUNT(DISTINCT PI_ID) FROM T_SCF_PROCINST t1
+         WHERE EXISTS (SELECT 1 FROM T_SCF_AUDIT_RECORD t2 WHERE t1.PI_ID = t2.PI_ID AND t2.ROLE_ID = #{roleId,jdbcType=VARCHAR})
+    </select>
+
+</mapper>

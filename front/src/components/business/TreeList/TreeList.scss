@@ -1,0 +1,253 @@
+/**
+ * SearchTree.scss
+ * 版权声明 厦门畅享信息技术有限公司, 版权所有 违者必究
+ * Copyright:  Copyright (c) 2019
+ 
+ * @Company:厦门畅享信息技术有限公司
+ * @author: wangzs
+ * @date: 2019-12-12 10:44:04
+ */
+.treeContent {
+     width: 100%;
+    //display: table-cell;
+    position: relative;
+    transition: all 0.3s ease 0s;
+}
+.searchTree {
+    width: 100%;
+    //display: table-cell;
+    background-color: #fff;
+    transition: 0.3s;
+    p{
+        font-size: 12px;
+    }
+    :global {
+        .ant-tree{
+            margin-top:10px;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+        .ant-tree > li:first-child {
+            padding-top: 0px;
+        }
+        .ant-tree > li:last-child {
+            padding-bottom: 0px;
+        }
+        .ant-tree-treenode-switcher-close {
+            padding: 6px 0;
+        }
+        .ant-tree li .ant-tree-node-content-wrapper{
+            height:auto;
+            line-height: 26px;
+            width: 93%;
+            position: relative;
+            border-radius: 0;
+            .title-con{
+               display: flex;
+                align-items: center;
+                line-height: 1.5;
+                padding:5px 0;
+                .icon{
+                    width:15px;
+                    height:17px;
+                    margin-right:3px;
+                    i{
+                        font-size: 18px;
+                        &.success{
+                            color: green;
+                        }
+                        &.warning{
+                            color:#fe6555
+                        }
+                        &.backed{
+                            position: relative;
+                            top:-3px;
+                        }
+                        &.orange{
+                            color:orange;
+                        }
+                    }
+                }
+                .tree-text{
+                    width: 80%;
+                    word-break: break-all;
+                    white-space:normal;
+                    margin:0;
+                    position: relative;
+                    color:#323538;
+                    &.text-level1,&.text-level2{
+                        font-weight: 800;
+                    }
+                    //padding-left:15px;
+                    .score{
+                        //color:#000;
+                        display: inline-block;
+                        margin-left:5px;
+                    }
+                    .self-score{
+                        color:#09d;
+                        display: inline-block;
+                        margin-left:5px;
+                    }
+
+                }
+            }
+
+        }
+        .ant-tree li .ant-tree-node-content-wrapper.ant-tree-node-selected{
+            background-color: rgba(0, 153, 221, 0.1)!important;
+        }
+        .ant-input {
+            border-radius: 0;
+        }
+        .ant-tree li .ant-tree-node-content-wrapper:hover {
+            //background-color: #ebeced;
+            border-radius: 4px;
+        }
+        .ant-tree li {
+            padding: 0;
+            margin: 4px 0;
+            .ant-tree-switcher{
+                top:2px;
+            }
+        }
+        .ant-tree li span.ant-tree-checkbox{
+            top: 2px;
+        }
+        .ant-tree-switcher_close {
+            .si-com_angledown {
+                transition: 0.4s;
+                transform: rotate(-90deg) !important;
+            }
+        }
+        .ant-tree-switcher_open {
+            .si-com_angledown {
+                transition: 0.4s;
+                transform: rotate(0deg) !important;
+            }
+        }
+        .si-com_sxz:before {
+            color: #fff;
+            font-size: 16px;
+            vertical-align: baseline;
+            transition: 0.2s;
+        }
+        .si-com_plusthin:before {
+            color: #09d;
+            font-size: 16px;
+            margin-left: 5px;
+        }
+        .si-com_edit:before{
+            color: orange;
+            font-size: 16px;
+            margin-left: 5px;
+        }
+        .si-com_delete:before {
+            color: #fe6555;
+            font-size: 16px;
+            margin-left: 5px;
+        }
+        .si-com_sxy:before {
+            color: #fff;
+            font-size: 16px;
+            vertical-align: baseline;
+            transition: 0.2s;
+        }
+        .ant-tree li span.ant-tree-switcher {
+            //vertical-align: middle;
+            //display: none;
+        }
+        .si-com_zq1:before {
+            color: #09d;
+            font-size: 14px;
+            margin-left: 5px;
+        }
+        .si-com_wtg1:before {
+            color: #fe6555;
+            font-size: 14px;
+            margin-left: 5px;
+        }
+    }
+}
+.addNew {
+    background: #09d;
+    font-size: 12px;
+    color: #fff;
+    cursor: pointer;
+    padding: 0 5px;
+    border-radius: 5px;
+    height: 32px;
+    line-height: 32px;
+    margin-right:10px;
+    //float: right;
+}
+.iconGroup {
+    position: absolute;
+    top: 5px;
+    right:10px;
+}
+.iconGroup-2{
+    right:12px;
+}
+.iconGroup-3{
+    right:14px;
+}
+.iconGroup-4{
+    right:16px;
+}
+.iconPlus {
+    margin-left: 5px;
+    color: #0099dd;
+}
+
+.iconDelete {
+    margin-left: 5px;
+    color: #fe6555;
+}
+
+.label {
+    display: inline-block;
+    max-width: 270px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 14px;
+    vertical-align: middle;
+}
+.toggle {
+    position: absolute;
+    top: 50%;
+    right: -20px;
+    transform: translate(0, -50%);
+    background-color: #d0d1d4;
+    z-index: 100;
+    padding: 12px 4px 12px 2px;
+    cursor: pointer;
+}
+
+.box {
+    overflow: hidden;
+    padding: 0 0 12px 0;
+    transition: all 0.3s ease 0s;
+    overflow-x: auto;
+    .searchBox{
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+        .searchInput{
+            input{
+                height:30px!important;
+            }
+        }
+
+    }
+}
+
+.length {
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+.iconHide {
+    visibility: hidden;
+}

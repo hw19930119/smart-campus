@@ -1,0 +1,77 @@
+/*!
+ * @(#) index.scss
+ * 版权声明 厦门畅享信息技术有限公司, 版权所有 违者必究
+ *
+ * <br> Copyright:  Copyright (c) 2020
+ * <br> Company:厦门畅享信息技术有限公司
+ * <br> @author lihui
+ * <br> 2020-08-12 16:10:35
+ */
+@import "../../../../../assets/sass/base";
+@mixin appr($col){
+  display: inline-block;
+  padding:2px 6px;
+  color: $col;
+  border: 1px solid $col;
+  border-radius: 4px;
+}
+:global{
+  .query-VW_APPLYUSER_ALL_FA{
+    .approve{
+      @include appr($color-blue);
+    }
+    .approve-no{
+      @include appr($color-red);
+    }
+    .approve-ing{
+      @include appr($color-green);
+    }
+    .approve-wrz{
+      @include appr($color777);
+    }
+    th[field = MATERIAL]{
+      width: 20%;
+    }
+    th[field = NAME]{
+      width: 10%;
+    }
+    th[field = SCHOOL_TYPE]{
+      width: 10%;
+    }
+    th[field = STATE]{
+      width: 10%;
+    }
+    th[field = ID]{
+      width: 10%;
+    }
+    .item-file-box{
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      >div:nth-child(1){
+        padding-right: 5px;
+      }
+      >div:nth-child(2){
+        width: 75%;
+      }
+      img{
+        width:40px;
+        height: 40px;
+      }
+      .hidden-name{
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+  #modal-iframeModalVW_APPLYUSER_AUDIT_FA{
+    .modal-header{
+      border-bottom: none !important;
+    }
+    .body-inset{
+      padding:0 !important;
+    }
+  }
+}

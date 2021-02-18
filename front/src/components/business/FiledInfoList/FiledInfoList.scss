@@ -1,0 +1,105 @@
+/*!
+ * @(#) InfoList.scss
+ * 版权声明 厦门畅享信息技术有限公司, 版权所有 违者必究
+ *
+ * <br> Copyright:  Copyright (c) 2020
+ * <br> Company:厦门畅享信息技术有限公司
+ * <br> @author wuxw
+ * <br> 2020-03-19 15:49:54
+ * ————————————————————————————————
+ *    修改记录
+ *    修改者：
+ *    修改时间：
+ *    修改原因：
+ * ————————————————————————————————
+ */
+.InfoItem {
+    clear: both;
+    overflow: hidden;
+    border-bottom: 1px solid #ebeced;
+    position: relative;
+    padding: 0 20px;
+    line-height: 1;
+}
+
+.titleBox {
+    margin-bottom: 9px;
+    margin-top: 16px;
+}
+
+.title {
+    font-size: 14px;
+    color: #07b;
+    position: relative;
+    top: 2px;
+
+    display: inline-block;
+    max-width: 80%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.status {
+    margin-left: 12px;
+}
+
+.label {
+    font-size: 12px;
+    color: #74767a;
+}
+
+.data {
+    font-size: 12px;
+    color: #404348;
+}
+
+.item {
+    float: left;
+    // width: 33%;
+    padding: 5px 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 1em;
+    height: 22px;
+}
+
+.fieldBox {
+    width: 90%;
+    overflow: hidden;
+    clear: both;
+    float: left;
+    margin-bottom: 10px;
+}
+
+.operations {
+    // float: right;
+    float: right;
+    // position: absolute;
+    // right: 20px;
+    // top: 0;
+    // height: 100%;
+}
+
+.operate {
+    color: #09d;
+    font-size: 12px;
+    cursor: pointer;
+    text-align: right;
+    max-width: 100px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.operateBox {
+    display: table;
+    height: 100%;
+}
+
+.tablecell {
+    display: table-cell;
+    vertical-align: middle;
+    height: 100%;
+}

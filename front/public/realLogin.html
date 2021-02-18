@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="expires" content="0">
+    <title>正式和模拟的登录回调界面(PC)</title>
+    <script src="js/jquery/jquery.min.js"></script>
+    <script src="js/util/loginUtils.js?version=20200327000000"></script>
+    <style></style>
+</head>
+<body>
+<div class="load-div"><h2></h2></div>
+</body>
+</html>
+<script>
+    $(document).ready(function () {
+        clearAllCookie();
+        getUserAndGoHomePage();
+    });
+    //getUserAndGoHomePage
+    function getUserAndGoHomePage() {
+        var code = formatGetQueryVariable("ticket");
+
+        var userId = formatGetQueryVariable("userId");
+
+        var idNum = formatGetQueryVariable("idNum");
+        var name = formatGetQueryVariable("name");
+        var mobileNum = formatGetQueryVariable("mobileNum");
+        console.log('userId===', userId);
+
+        getLoginUserInfoAndGoHomePage(code,idNum,name,mobileNum,userId);
+    }
+    function getLoginUserInfoAndGoHomePage(code,idNum,name,mobileNum,userId) {
+        var postParams={};
+        postParams.code=code;
+
+        postParams.userId=userId;
+
+        postParams.idNum=idNum;
+        postParams.name=name;
+        postParams.mobileNum=mobileNum;
+
+        if((code==null||code=='')
+            &&(userId==null||userId=='')
+            &&(idNum==null||idNum=='')){
+            window.location.href = "https://www.xmedu.cn/door/index";
+            return;
+        }
+        var getUserInfoUrl='iEduUser/realLogin';
+        $.ajax({
+            type: "POST",
+            url: getUserInfoUrl,
+            data: JSON.stringify(postParams),
+            contentType:"application/json",
+            async: true,
+            dataType: "json",
+            success:function(data, textStatus,jqXHR){
+                if(!commomCheckLogin(data)){
+                    return false;
+                }
+                console.info("ajaxPostJson Response data:"+JSON.stringify(data));
+                afterConvertLogin(data);
+            },
+            complete:function(jqXHR, textStatus ){
+            },
+            error: function(jqXHR, textStatus,errorThrown ){
+                document.write(JSON.stringify(errorThrown));
+            }
+        });
+    }
+    //应用后台通用结果处理
+    function commomCheckLogin(responseJsonStr) {
+        if (responseJsonStr.status == 1400
+            ||responseJsonStr.status == 1401
+            ||responseJsonStr.status == 1402
+            ||responseJsonStr.status == 1403) {
+            document.write(responseJsonStr.message);
+            return false;
+        } else {
+            return true;
+        }
+    }
+    //
+    function afterConvertLogin(responseJsonStr) {
+        //将设置在cookie里,如果不存在，则提示，不进行后续操作
+        setCookie("my.com.trs.idm.coSessionId", responseJsonStr.data.sessionId);
+        goIntoPageAfterAuthAll(responseJsonStr.data);
+    }
+
+    //微信和应用端完全授权后进入首页
+    function goIntoPageAfterAuthAll(data) {
+        if(data.iEduUserVo.applyUserVo==null&&data.iEduUserVo.auditUserVo==null){
+            document.write("用户不存在："+JSON.stringify(data.iEduUserVo));
+            return;
+        }
+        var h = window.location.href.split("/realLogin.html")[0];
+        var toPage="/changeUser.html";//"/index.html#/school";
+        if(data.iEduUserVo.type=="AUDIT"){
+            toPage="/role.html#/";
+        }else{
+            toPage="/apply.html#/";
+        }
+        window.location.href = h + toPage;
+    }
+</script>

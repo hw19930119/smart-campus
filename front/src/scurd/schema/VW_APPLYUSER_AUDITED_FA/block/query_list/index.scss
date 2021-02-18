@@ -1,0 +1,17 @@
+/*!
+ * @(#) index.scss
+ * 版权声明 厦门畅享信息技术有限公司, 版权所有 违者必究
+ *
+ * <br> Copyright:  Copyright (c) 2020
+ * <br> Company:厦门畅享信息技术有限公司
+ * <br> @author lihui
+ * <br> 2020-08-24 15:08:00
+ */
+:global{
+  .query-VW_APPLYUSER_AUDIT_FA,.query-VW_APPLYUSER_AUDITED_FA{
+    th[field = ID]{
+      width: 10%;
+    }
+  }
+}
+

@@ -1,0 +1,25 @@
+@import '../../../assets/sass/base';
+:global{
+    .zp-score-con {
+        //.ant-table-thead> tr>th{
+        //    background: $gray-background;
+        //}
+        //.ant-table-thead > tr>th, .ant-table-tbody > tr>td{
+        //    height: 34px;
+        //    padding: 0 16px;
+        //}
+        .score-table{
+            width: 100%;
+            td,th{
+                text-align: center;
+                height: 38px;
+                border-top: 1px solid #ebeced;
+                border-bottom: 1px solid #ebeced;
+            }
+            th{
+                background: #f8f8f9;
+                font-weight: normal;
+            }
+        }
+    }
+}

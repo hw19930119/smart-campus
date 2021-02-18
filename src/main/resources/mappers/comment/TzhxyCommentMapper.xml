@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunsharing.smartcampus.mapper.comment.TzhxyCommentMapper">
+
+    <select id="queryCommentForTemplateId" resultType="com.sunsharing.smartcampus.model.vo.comment.CommentVo">
+        SELECT
+            A.EXPERT_ID as userId,
+            C.`NAME` as userName,
+            B.DECLARE_TEXT as context,
+            A.FIELD_IDS as fieldIds
+        FROM
+			T_SC_AUDIT_USER C,
+            T_ZHXY_DPCONFIG A
+            LEFT JOIN T_ZHXY_COMMENT B ON(A.DP_ID = B.DP_ID AND B.DECLARE_ID = #{declareId,jdbcType=VARCHAR} AND B.DEL = '0')
+        WHERE A.EXPERT_ID = C.ID
+        AND A.DEL = '0'
+        AND A.TEMPLATE_ID = #{templateNo,jdbcType=VARCHAR}
+    </select>
+</mapper>

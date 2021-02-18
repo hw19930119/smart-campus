@@ -1,0 +1,25 @@
+/*
+ * @(#) Home.scss
+ * 版权声明 厦门畅享信息技术有限公司, 版权所有 违者必究
+ *
+ * <br> Copyright:  Copyright (c) 2019
+ * <br> Company:厦门畅享信息技术有限公司
+ * <br> @author liuxia
+ * <br> 2020/8/3 14:25
+ */
+@import "../../../assets/sass/base";
+:global{
+  .pageLoad-con {
+    background: $gray-background;
+    max-width: 1200px;
+    margin: 20px auto;
+    //.panel {
+    //  margin: 0 !important;
+    //}
+  }
+  @media screen and (max-width: 1399px) and (min-width: 1166px){
+    .pageLoad-con{
+      width: 1148px;
+    }
+  }
+}

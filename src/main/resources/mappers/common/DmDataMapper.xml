@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  ~ @(#) DmDataMapper.xml
+  ~ 版权声明 厦门畅享信息技术有限公司, 版权所有 违者必究
+  ~
+  ~ <br> Copyright:  Copyright (c) 2020
+  ~ <br> Company:厦门畅享信息技术有限公司
+  ~ <br> @author hanjb
+  ~ <br> 2020-07-22 16:56:48
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.sunsharing.smartcampus.mapper.common.DmDataMapper">
+
+    <select id="findByStartCodeAndEndCode" resultType="java.util.Map">
+        SELECT BH0000 code,
+            MC0000 name
+         FROM WG_DM.DM_XZQH_QG
+        WHERE
+             BH0000 like concat(#{startCode,jdbcType=VARCHAR},'%')
+            AND
+             BH0000 like concat('%', #{endCode,jdbcType=VARCHAR})
+            AND
+            BH0000 != #{baseXqxh,jdbcType=VARCHAR}
+            AND
+             ZXBS = '0'
+    </select>
+
+    <select id="queryStartDm" resultType="com.sunsharing.smartcampus.model.vo.common.DmData">
+        SELECT BH0000 AS code,MC0000 as name FROM ${dmName}
+    </select>
+    <select id="querySchoolTypeHeadFour" resultType="hashmap">
+      SELECT BH0000 AS id,MC0000 as label FROM DM_SCHOOL_TYPE ORDER BY XH0000 ASC LIMIT 4
+    </select>
+
+    <select id="queryZhSelectDm" resultType="com.sunsharing.smartcampus.model.vo.common.DmData">
+        SELECT BH0000 AS code,MC0000 as name FROM DM_ZH_SELECT WHERE MACK = #{mark,jdbcType=VARCHAR}
+    </select>
+
+    <select id="querySchoolDm" resultType="com.sunsharing.smartcampus.model.vo.common.SchoolVo">
+        SELECT
+        UNIT_CODE AS id,
+        SCHOOL_NAME AS label,
+        SCHOOL_TYPE as schoolType,
+        SCHOOL_TYPE_NAME as schoolTypeName,
+        XZQH as xzqh
+        FROM T_ZHXY_SCHOOL
+        WHERE 1 = 1
+        <if test="xzqh != null and xzqh != ''">
+            AND XZQH = #{xzqh}
+        </if>
+        ORDER BY SCHOOL_TYPE,SCHOOL_TYPE_NAME
+    </select>
+
+    <select id="queryDpOpinion" resultType="java.util.Map">
+      SELECT BH0000 AS id,MC0000 as label FROM DM_DP_OPINION
+    </select>
+</mapper>

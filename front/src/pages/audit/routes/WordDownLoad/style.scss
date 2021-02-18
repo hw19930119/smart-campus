@@ -1,0 +1,51 @@
+/*
+ * @(#) style.scss
+ * 版权声明 厦门畅享信息技术有限公司, 版权所有 违者必究
+ *
+ * <br> Copyright:  Copyright (c) 2019
+ * <br> Company:厦门畅享信息技术有限公司
+ * <br> @author liuxia
+ * <br> 2020/11/10 11:22
+ */
+@import "../../../../assets/sass/base";
+:global{
+  .pdf-detail-con{
+    margin: 15px;
+    //display: flex;
+    .pdf-title{
+      .pdf-info{
+        @include flex(row,flex-start,center);
+        padding: 0;
+        > li{
+          list-style: none;
+          width: 20%;
+          font-size: $font-size-medium;
+          &:first-child{
+            width: 40%;
+          }
+          &:last-child{
+            text-align: center;
+            a{
+              margin: 0 15px;
+            }
+          }
+        }
+      }
+    }
+    .pdf-show{
+      text-align: center;
+      .pager{
+        .previous > a,
+        .previous > span,
+        .next > a,
+        .next > span{
+          float: none;
+          margin: 0 50px;
+        }
+      }
+      &.pdf-show-hidden{
+        display: none;
+      }
+    }
+  }
+}

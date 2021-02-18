@@ -1,0 +1,45 @@
+/*!
+ * @(#) style.scss
+ * 版权声明 厦门畅享信息技术有限公司, 版权所有 违者必究
+ *
+ * <br> Copyright:  Copyright (c) 2020
+ * <br> Company:厦门畅享信息技术有限公司
+ * <br> @author Administrator
+ * <br> 2020-11-02 16:49:12
+ */
+
+:global{
+  .index-allocation.config-expert{
+   height:100%;
+    margin: 0 auto;
+    padding:0;
+    min-width: inherit;
+    background: #fff;
+    .zb-con{
+      height:100%;
+      border-bottom: none;
+      .tree-con{
+        padding-left:12px;
+        height:100%;
+        padding-bottom:0;
+        margin-bottom:0;
+        >div{
+          height:100%;
+          >div{
+            height:100%;
+            >div{
+              height:100%;
+              .ant-tree{
+                height:92%;
+              }
+            }
+          }
+        }
+      }
+      .zb-content{
+        height: 100%;
+        overflow-y: auto;
+      }
+    }
+  }
+}

@@ -1,0 +1,60 @@
+@import '../../../assets/sass/base';
+:global{
+    .score-con {
+        .panel-head{
+            .right-item{
+                margin: 5px 7px 0 0;
+                .btn:hover{
+                    color: $color-fff!important;
+                }
+            }
+        }
+        .score-table{
+            tr > th:last-child,tr > td:last-child{
+                width: 140px!important;
+                a{
+                    margin-right: 20px;
+                    cursor: pointer;
+                    &:last-child{
+                        margin-right: 0;
+                    }
+                }
+            }
+        }
+        .pj-score-con{
+            margin-top: 10px;
+            position: relative;
+            .form-table{
+                tr>td,tr > th{
+                    border-bottom: 1px solid #ebeced!important;
+                    border-top: 1px solid #ebeced!important;
+                }
+                tr:first-child{
+                    position: relative;
+                    .download-btn{
+                        border: 1px solid #09d;
+                        padding: 5px 10px;
+                        border-radius: 5px;
+                        margin-left: 20px;
+                    }
+                    th > label{
+                        padding-bottom: 15px!important;
+                    }
+                    td > .input-hasTip{
+                        padding-top: 16px;
+                    }
+                }
+                th{
+                    width:150px;
+                    text-align: right;
+                    .labelItem{
+                        width:150px;
+                    }
+                }
+
+            }
+
+
+        }
+    }
+}

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ @(#) FieldValueMapper.xml
+  ~ 版权声明 厦门畅享信息技术有限公司, 版权所有 违者必究
+  ~
+  ~ <br> Copyright:  Copyright (c) 2020
+  ~ <br> Company:厦门畅享信息技术有限公司
+  ~ <br> @author Administrator
+  ~ <br> 2020-08-05 18:11:32
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sunsharing.smartcampus.mapper.filed.FieldValueMapper">
+
+    <insert id="savaFieldValue">
+        INSERT INTO T_FIELD_VALUE (ID,CATEGORY_ID,DEL,DECLARE_ID,FIELD_CONTENT,ZP_SCORE,STATE,MESSAGE) VALUES (
+        replace(uuid(),"-",""),#{categoryId,jdbcType=VARCHAR},"0",#{schoolId,jdbcType=VARCHAR},
+        #{value,jdbcType=VARCHAR}, #{score,jdbcType=VARCHAR},"0",#{message,jdbcType=VARCHAR}
+        )
+    </insert>
+    <select id="selectFieldValueBySchoolIdCategoryId" resultType="com.sunsharing.smartcampus.model.pojo.filed.FieldValue">
+        SELECT * FROM T_FIELD_VALUE WHERE DECLARE_ID=#{g_id,jdbcType=VARCHAR} AND CATEGORY_ID=#{categoryId,jdbcType=VARCHAR}
+    </select>
+    <select id="selectFieldValueBySchoolId" resultType="com.sunsharing.smartcampus.model.pojo.filed.FieldValue">
+        SELECT * FROM T_FIELD_VALUE WHERE DECLARE_ID=#{g_id,jdbcType=VARCHAR}
+    </select>
+    <update id="updateFieldValue">
+        UPDATE T_FIELD_VALUE
+         SET CATEGORY_ID=#{categoryId,jdbcType=VARCHAR},
+              FIELD_CONTENT=#{value,jdbcType=VARCHAR},
+              DECLARE_ID=#{schoolId,jdbcType=VARCHAR},
+              ZP_SCORE=#{score,jdbcType=VARCHAR},
+              STATE="0",
+              MESSAGE=#{message,jdbcType=VARCHAR},
+              SUP_FILES = #{supFiles,jdbcType=VARCHAR}
+         WHERE ID=#{id,jdbcType=VARCHAR}
+    </update>
+
+    <select id="selectFieldValueByDeclareId" resultType="com.sunsharing.smartcampus.model.pojo.filed.FieldValue">
+        SELECT
+            A.*, B.BH0000 AS codeKey,
+            B.MC0000 AS codeLabel
+        FROM
+            T_FIELD_VALUE A LEFT JOIN
+            T_ZHXY_DPOPINION B ON(	A.DECLARE_ID = B.DECLARE_ID AND A.CATEGORY_ID = B.FIELD_ID)
+        WHERE A.DECLARE_ID = #{g_id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="queryCheckFieldValueForDeclareId" resultType="java.lang.Integer">
+        SELECT
+            COUNT(DISTINCT C.ID)
+        FROM
+            T_CATEGORY_CONFIG C,
+            T_POLICY_CG_FIELD_CONFIG D
+        WHERE
+            C.ID = D.FIELD_CATEGORY
+        AND C.DEL = '0'
+        AND C.TEMPLATE_ID = (
+            SELECT
+                A.TEMPLATE_NO
+            FROM
+                T_ZHXY_TEMPLATE A,
+                T_ZHXY_BASEINFO B
+            WHERE
+                A.PC_ID = B.PC_NO
+            AND A.TEMPLATE_TYPE LIKE concat('%', B.SCHOOL_TYPE, '%')
+            AND B.DECLARE_ID = #{declareId}
+            AND B.DEL = '0'
+            AND A.DEL = '0'
+        )
+        AND NOT EXISTS (
+            SELECT
+                *
+            FROM
+                T_FIELD_VALUE F
+            WHERE
+                F.DECLARE_ID = #{declareId}
+            AND F.CATEGORY_ID = C.ID
+            AND F.DEL = '0'
+        )
+    </select>
+</mapper>

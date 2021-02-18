@@ -1,0 +1,27 @@
+share:
+  scurd:
+    commonfs:
+      local-ip: 127.0.0.1
+      file-server-type: JFS
+      file-server-dfs-proxy-ip: 192.168.0.55
+      file-server-dfs-real-ip: 192.168.0.55
+      file-server-dfs-port: 8310
+      file-server-jfs-path: E:/clienthome
+    config-db: defualDataSource
+  sys:
+    cron: 0 0 1 * * ?
+iedu:
+  #https://www.ixm.gov.cn/ids/service?idsServiceType=httpssoservice
+  #不配置
+  idsUrl:
+  #正式环境找i厦门教育要appId
+  appId: f8d1ca13ca1b4e15985b39fe09f1a615
+  appSecret: CX3GSNV2L8RPFYWI0ZKUT5DH
+  aesKey: NXPDQ4CLME25BAVK
+  aesIv: 1EC9IMD5NV0TZ3LX
+  #不配置
+  idsUrlHttpPrefix:
+  #https://www.ixm.gov.cn/ids
+dev:
+  # 前端开发路径，上线后可不配置
+  frontPath:

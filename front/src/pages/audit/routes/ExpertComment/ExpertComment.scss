@@ -1,0 +1,59 @@
+/*!
+ * @(#) ExpertComment.scss
+ * 版权声明 厦门畅享信息技术有限公司, 版权所有 违者必究
+ *
+ * <br> Copyright:  Copyright (c) 2020
+ * <br> Company:厦门畅享信息技术有限公司
+ * <br> @author Administrator
+ * <br> 2020-11-04 11:08:55
+ */
+@import "../../../../assets/sass/base";
+:global{
+  .expert-comment {
+    background: $color-fff;
+    max-width: 1200px;
+    margin: 12px auto;
+    padding: 0 0 20px 0;
+    min-width:1135px;
+    .evaluation-title{
+      margin:0;
+      >.panel-body{
+        padding-bottom:20px;
+      }
+    }
+    .page-btn-bar{
+      margin:0;
+      .pull-right{
+        padding-right:20px;
+        .btn{
+          text-align: center;
+          line-height: 35px;
+          width: 80px;
+          height: 36px;
+          padding: 0;
+          min-width: 80px;
+        }
+      }
+    }
+    ::-webkit-scrollbar
+    {
+      width: 5px;
+      height: 5px;
+      background-color: rgba(208, 209, 212, 0.5);
+    }
+
+    /* 垂直滚动条的滑动块 */
+    ::-webkit-scrollbar-thumb:vertical {
+      -webkit-box-shadow: inset 0 0 6px rgba(153, 153, 153,1);
+      background-color: rgba(208, 209, 212, 0.5);
+    }
+    /* 横向滚动条的滑动块 */
+    ::-webkit-scrollbar-thumb:horizontal{
+      -webkit-box-shadow: inset 0 0 6px rgba(153, 153, 153,1);
+      background-color: rgba(208, 209, 212, 0.5);
+
+    }
+    * { touch-action: pan-y; }
+
+  }
+}

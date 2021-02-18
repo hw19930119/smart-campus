@@ -1,0 +1,45 @@
+/*!
+ * @(#) AddSupFiles.scss
+ * 版权声明 厦门畅享信息技术有限公司, 版权所有 违者必究
+ *
+ * <br> Copyright:  Copyright (c) 2020
+ * <br> Company:厦门畅享信息技术有限公司
+ * <br> @author Administrator
+ * <br> 2020-11-18 15:40:52
+ */
+
+:global{
+  .add-supFile{
+    .panel-head{
+      background: #f8f8f9;
+      border-bottom: 1px solid #ddd;
+      color: #323538;
+      font-weight: 800;
+    }
+    .file-lists{
+      width:93%;
+      margin-bottom:10px;
+      padding-left:0;
+      .file-item{
+        border: 1px solid #d0d1d4;
+        padding: 5px 5px 5px 8px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 5px 0;
+        border-radius: 4px;
+        a{
+          width:90%;
+          color:#09d;
+        }
+        .deleteBtn{
+          font-size: 14px;
+          font-style: normal;
+          cursor: pointer;
+          margin-left: 5px;
+          color: red;
+        }
+      }
+    }
+  }
+}

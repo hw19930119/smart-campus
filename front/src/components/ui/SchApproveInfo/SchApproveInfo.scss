@@ -1,0 +1,66 @@
+@import '../../../assets/sass/base';
+:global{
+    .check-con{
+        background: $color-fff;
+        margin-bottom: 10px;
+        padding: 15px 20px;
+        ul{
+            @include flex(row,flex-start,center);
+            li{
+                font-size: $font-size-medium;
+                &:first-child{
+                    width: 40%;
+                    @include flex(row,flex-start,center);
+                    .si-app_rz{
+                        font-size: 40px;
+                        background: $color-blue;
+                        color: $color-fff;
+                        padding: 10px;
+                        margin-right: 13px;
+
+                    }
+                    p{
+                        margin-bottom: 0;
+                        > b{
+                            font-size: $font-size-large-18;
+                            margin-bottom: 8px;
+                            display: block;
+                        }
+                    }
+                }
+                &:nth-child(2){
+                    width: 40%;
+                    b{
+                        font-size: $font-size-large;
+                        color: $color-orange;
+                        &.isChecked-b{
+                            color: $color-blue;
+                        }
+                        &.isChecked-fail-b{
+                            color: $color-red;
+                        }
+                        &.isChecked-ing-b{
+                            color: $color-green;
+                        }
+                    }
+                    p{
+                        color: $color777;
+                        font-weight: bold;
+                        margin-top: 5px;
+                        &.reason-p{
+                            font-weight: normal;
+                            color: $color-red;
+                        }
+                    }
+                }
+                &:last-child{
+                    width: 20%;
+                    text-align: right;
+                    .btn{
+                        margin-left: 10px;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,39 @@
+@import '../../../assets/sass/base';
+:global{
+    .ant-rate{
+        .ant-rate-text{
+            color: $color-blue;
+        }
+        .anticon{
+            font-size: 24px;
+            margin-right: 2px;
+        }
+    }
+
+    .audit-deal-con{
+        .audit-btn-con{
+            padding: 10px;
+            text-align: center;
+            .btn:last-child{
+                margin-left: 15px;
+            }
+        }
+        .slzx-score{
+            .sub-item{
+                @include flex(row,flex-start,center);
+                input{
+                    width:150px;
+                }
+            }
+        }
+        .slzx-files{
+            .panel{
+                margin:0;
+                .panel-head{
+                    display: none;
+                }
+            }
+        }
+    }
+
+}

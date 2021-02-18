@@ -1,0 +1,21 @@
+@import "../../../assets/sass/base";
+
+:global{
+    .pageLoad-con{
+        width: 1382px;
+        margin: 20px auto;
+        //padding: 20px;
+    }
+    .zb-con{
+        @include flex(row,space-between,flex-start);
+        .tree-con{
+            width: 30%;
+        }
+        .zb-content{
+            width: 69%;
+            background: #fff;
+            padding: 15px;
+
+        }
+    }
+}

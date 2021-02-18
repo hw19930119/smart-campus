@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta http-equiv="expires" content="0">
+    <title>模拟登录(PC)</title>
+    <script src="js/jquery/jquery.min.js"></script>
+    <script src="js/util/loginUtils.js?version=20200327000000"></script>
+    <style></style>
+</head>
+<body>
+<div class="load-div"><h2></h2></div>
+PC测试:<br>
+<br>
+500226199511214341,审核用户,翔安区,区领导</br>
+500226199511214342,审核用户,厦门市,专家</br>
+500226199511214343,审核用户,厦门市,受理中心专员</br>
+500226199511214344,审核用户,厦门市,市教育局</br>
+500226199511214345,管理员,厦门市</br>
+idNum:<input id="idNum_input" type="text" value="500226199511214339"/><input type="button" onclick="changeUser()" value="（植入模拟值）用户登录"/></br>
+name（注册时用）:<input id="name_input" type="text" value="注册的用户名"/></br>
+mobileNum（注册时用）:<input id="mobileNum_input" type="text" value="15012345678"/></br>
+</br></br>
+
+<a href="iEduUser/getIeduUserLoginCache" target="_blank">获取登录的所有信息测试</a><br><br>
+<a href="iEduUser/logout" target="_blank">登出</a><br><br><br><br><br>
+
+<script>
+    $(document).ready(function () {
+
+    });
+    function changeUser(){
+        clearAllCookie();
+        var idNum=$("#idNum_input").val();
+        idNum=encodeURIComponent(idNum);
+
+        var name=$("#name_input").val();
+        name=encodeURIComponent(name);
+
+        var mobileNum=$("#mobileNum_input").val();
+        mobileNum=encodeURIComponent(mobileNum);
+
+        var h = window.location.href.split("/changeUser.html")[0];
+        window.open(h + "/realLogin.html?idNum="+idNum+"&name="+name+"&mobileNum="+mobileNum);
+    }
+</script>
+<!--机构用户：
+<table>
+    <tr><th>QY_NAME</th><th>XZQH</th><th>USCC</th></tr>
+    <tr><td>厦门麦克奥迪医学检验所</td><td></td><td>913502003028035035</td></tr>
+</table>
+</br>
+学校用户：
+<table>
+    <tr><th>QY_NAME</th><th>XZQH</th><th>USCC</th></tr>
+    <tr><td>戴尔（中国）有限公司</td><td>350206</td><td>913502006120204831</td></tr>
+</table>
+<style>
+    table{
+        border-collapse: collapse;
+        width: 100%;
+    }
+    th, td{
+        text-align: left;
+        padding: 8px;
+    }
+    tr:nth-child(even){
+        background-color: #fafafa;
+    }
+    th{
+        background-color: #7799AA;
+        color: white;
+    }
+</style>-->
+
+</body>
+</html>

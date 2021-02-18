@@ -1,0 +1,45 @@
+/*!
+ * @(#) OverHome.scss
+ * 版权声明 厦门畅享信息技术有限公司, 版权所有 违者必究
+ *
+ * <br> Copyright:  Copyright (c) 2020
+ * <br> Company:厦门畅享信息技术有限公司
+ * <br> @author lihui
+ * <br> 2020-10-29 14:54:20
+ */
+:global{
+  .setBackground{
+    background: #f0f2f5;
+  }
+  .over-home{
+     padding:120px 0;
+     min-width: 1000px;
+     width: 70%;
+     margin: auto;
+     display: flex;
+     justify-content: flex-start;
+  }
+  .img-box{
+    display: flex;
+    img{
+      width: 200px;
+    }
+    width: 240px;
+    height: auto;
+  }
+  .info-box{
+    width: 62%;
+    padding-top: 30px;
+    h1{
+      font-weight: bold;
+    }
+    p{
+      font-size: 18px;
+      padding: 20px 0;
+    }
+    button{
+      display: block;
+      margin: auto;
+    }
+  }
+}

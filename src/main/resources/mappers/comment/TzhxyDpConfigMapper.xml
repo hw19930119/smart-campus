@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunsharing.smartcampus.mapper.comment.TzhxyDpConfigMapper">
+
+    <select id="queryWhetherDp" resultType="java.lang.Integer">
+        SELECT
+        COUNT(*)
+        FROM
+        T_ZHXY_DPCONFIG C,
+        T_ZHXY_COMMENT D
+        WHERE
+        C.DP_ID = D.DP_ID
+        AND C.TEMPLATE_ID = #{templateId,jdbcType=VARCHAR}
+        AND C.EXPERT_ID = #{expertId,jdbcType=VARCHAR}
+        AND D.DEL = '0'
+        AND C.DEL = '0'
+    </select>
+
+    <select id="getExpertCategoryIdList" resultType="com.sunsharing.smartcampus.model.pojo.comment.TzhxyDpConfig">
+        SELECT
+            dpc.DP_ID, dpc.EXPERT_ID, dpc.PC_NO, dpc.TEMPLATE_ID, dpc.FIELD_IDS, dpc.CREATE_TIME, dpc.CREATE_PERSON, dpc.UPDATE_TIME, dpc.UPDATE_PERSON, dpc.DEL
+        FROM T_ZHXY_DPCONFIG dpc
+        WHERE dpc.EXPERT_ID= #{userId,jdbcType=VARCHAR}
+        AND dpc.TEMPLATE_ID=(
+            SELECT te.TEMPLATE_NO
+            FROM  T_ZHXY_BASEINFO bi
+            INNER JOIN  T_ZHXY_TEMPLATE te on te.PC_ID = bi.PC_NO
+                                           and te.TEMPLATE_TYPE LIKE concat('%',bi.SCHOOL_TYPE,'%')
+            AND bi.DECLARE_ID= #{declareId,jdbcType=VARCHAR}
+            AND te.DEL = '0'
+        )
+        AND dpc.del='0'
+    </select>
+
+    <select id="getAllParentNodeList" resultType="java.lang.String">
+        SELECT getParentNodeList(#{id,jdbcType=VARCHAR})
+    </select>
+
+
+</mapper>

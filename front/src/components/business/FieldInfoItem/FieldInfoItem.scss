@@ -1,0 +1,114 @@
+/**
+ * InfoItem.scss
+ * 版权声明 厦门畅享信息技术有限公司, 版权所有 违者必究
+ * Copyright:  Copyright (c) 2019
+ 
+ * @Company:厦门畅享信息技术有限公司
+ * @author: wangzs
+ * @date: 2019-12-12 20:18:40
+ */
+.InfoItem {
+    clear: both;
+    overflow: hidden;
+    border-bottom: 1px solid #ebeced;
+    position: relative;
+    padding: 0 20px;
+    line-height: 1;
+
+    //:global {
+    //    .tab-content p {
+    //        color: #09d;
+    //    }
+    //}
+}
+
+.titleBox {
+    margin-bottom: 9px;
+    margin-top: 16px;
+}
+
+.title {
+    font-size: 14px;
+    color: #07b;
+    position: relative;
+    top: 2px;
+
+    display: inline-block;
+    max-width: 80%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    cursor: pointer;
+}
+
+.status {
+    margin-left: 12px;
+}
+
+.label {
+    font-size: 12px;
+    color: #74767a;
+}
+
+.data {
+    font-size: 12px;
+    color: #404348;
+    // 文本截断
+    // display: inline-block;
+    // width: 200px;
+    // overflow: hidden;
+    // text-overflow: ellipsis;
+    // white-space: nowrap;
+    // line-height: 1em;
+    // position: relative;
+    // top: 2px;
+}
+
+.item {
+    float: left;
+    // width: 33%;
+    padding: 5px 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 1em;
+    height: 22px;
+}
+
+.fieldBox {
+    width: 90%;
+    overflow: hidden;
+    clear: both;
+    float: left;
+    margin-bottom: 10px;
+}
+
+.operations {
+    // float: right;
+    float: left;
+    width: 10%;
+}
+
+.operate {
+    color: #09d !important;
+    font-size: 12px;
+    cursor: pointer;
+    text-align: center;
+    max-width: 80%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.operateBox {
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+
+.tablecell {
+    display: table-cell;
+    vertical-align: middle;
+    height: 100%;
+}

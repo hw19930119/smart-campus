@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  ~ @(#) DeptMapper.xml
+  ~ 版权声明 厦门畅享信息技术有限公司, 版权所有 违者必究
+  ~
+  ~ <br> Copyright:  Copyright (c) 2020
+  ~ <br> Company:厦门畅享信息技术有限公司
+  ~ <br> @author hanjb
+  ~ <br> 2020-07-22 11:10:32
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.sunsharing.smartcampus.mapper.common.DeptMapper">
+
+    <select id="findSelectList" resultType="java.util.Map">
+        SELECT
+            t.dept_id 'value',
+            t.dept_name 'label'
+        FROM T_POLICY_DEPT_INFO t
+        WHERE t.zxbs = '0'
+    </select>
+
+    <select id="getAuthDeptList" resultType="java.util.Map">
+        SELECT
+        t.DEPT_ID 'id',
+        t.DEPT_NAME 'label'
+        FROM WG_YW.T_AUTH_DEPT t
+        WHERE t.DEL = '0'
+        <if test="xzqh != null and xzqh != '' ">
+            AND XZQH LIKE CONCAT(UPPER(#{xzqh,jdbcType=VARCHAR}), '%')
+        </if>
+    </select>
+
+    <select id="findAuthDeptNameById" resultType="java.lang.String">
+        SELECT
+        t.DEPT_NAME
+        FROM WG_YW.T_AUTH_DEPT t
+        WHERE
+        t.DEPT_ID = #{deptId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="batchQueryUserInfo" resultType="java.util.Map">
+        select U.USER_ID,U.USER_NAME,D.DEPT_ID,D.DEPT_NAME
+        from WG_YW.T_AUTH_USER U,WG_YW.T_AUTH_DEPT D
+        where U.DEPT_ID = D.DEPT_ID and U.USER_ID in
+        <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
+
+</mapper>

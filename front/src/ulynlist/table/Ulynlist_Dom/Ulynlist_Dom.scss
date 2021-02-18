@@ -1,0 +1,130 @@
+/*!
+ * @(#) Ulynlist_Dom.scss
+ * 版权声明 厦门畅享信息技术有限公司, 版权所有 违者必究
+ *
+ * <br> Copyright:  Copyright (c) 2020
+ * <br> Company:厦门畅享信息技术有限公司
+ * <br> @author lihui
+ * <br> 2020-08-14 15:45:34
+ */
+:global{
+  .ulynlist-dom{
+    font-size: 14px;
+    .list-box{
+      .list-box-title{
+        padding: 10px;
+        background: #f2f2f2;
+        >div{
+          display: flex;
+          align-items: center;
+          span:nth-child(1){
+            color: #000;
+            display: inline-block;
+            padding-right: 20px;
+            font-weight: bold;
+          }
+          span:nth-child(2){
+            //border: 1px solid #74767a;
+            //border-right: none;
+            display: inline-block;
+            //width:50px;
+            //height: 30px;
+            //padding-left:6px;
+            padding: 0 8px;
+            border-radius: 4px;
+            //line-height: 30px;
+
+            color: #ffffff;
+            background: #0099dd;
+          }
+          //span:nth-child(2):after{
+          //   content: "";
+          //   width: 20px;
+          //   height: 20px;
+          //   position: relative;
+          //   top:4px;
+          //   right:-10px;
+          //   display: inline-block;
+          //   border-top: 1px solid #74767a;
+          //   border-right: 1px solid #74767a;
+          //   transform: rotate(45deg);
+          //}
+        }
+      }
+      .list-box-content{
+        padding: 15px 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        &.school-item{
+          border-bottom:1px solid #ddd;
+          position: relative;
+          padding:10px;
+          &.active{
+            background: rgba(0,152,221,.1);
+          }
+          .school-info{
+            width:100%;
+            color:#323538;
+            display: flex;
+            justify-content: space-between;
+            p{
+              margin:0;
+              flex:1;
+            }
+            span{
+              margin-left:5px;
+              border-radius: 4px;
+              color: #ffffff;
+              background: #0099dd;
+              font-size: 12px;
+              height: 26px;
+              width: 50px;
+              text-align: center;
+              line-height: 26px;
+            }
+          }
+          .change-btn{
+            position: absolute;
+            opacity: 0;
+            right: 0;
+            width: 100%;
+            text-align: right;
+            z-index: 1;
+            a{
+              width:100%;
+              display: block;
+            }
+          }
+        }
+        >div:nth-child(1){
+          >div{
+            display: flex;
+            justify-content: flex-start;
+            >div{
+              width:290px;
+              span{
+                color: #0099dd;
+              }
+            }
+          }
+        }
+        >div:nth-child(2){
+          padding-right: 20px;
+            a:nth-last-of-type(1){
+              margin-left:5px;
+            }
+        }
+        &.db-con{
+          >div:nth-child(1){
+            >div{
+              >div{
+                width:350px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

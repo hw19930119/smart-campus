@@ -1,0 +1,64 @@
+@import '../../../assets/sass/base';
+
+:global{
+  .play-tag-modal{
+    .modal-body{
+      padding: 0 20px !important;
+
+    }
+  }
+  .setLabel-con{
+    .form-wrap{
+      .item{
+        th{
+          vertical-align: middle;
+          .labelItem{
+            padding-top: 0!important;
+            &:after{
+              top: 0;
+            }
+          }
+        }
+        th,td{
+          border:none;
+        }
+        &.label-input{
+          border-bottom:1px solid #ddd;
+          td{
+            width:60%;
+          }
+          .btn{
+            margin:10px 0 0 15px;
+          }
+        }
+      }
+      .sub-item{
+        padding-right: 20px;
+      }
+      .shareui-transfer_wrapper{
+        margin:5px 0;
+      }
+    }
+  }
+  .tag-item{
+    display: flex;
+    align-items: center;
+    .label{
+      margin:3px 5px 3px 0;
+      &.no-label{
+        padding:0;
+        color:#404348;
+      }
+    }
+    .add-tag{
+      color: #09d;
+      font-size: 24px;
+      cursor: pointer;
+      width: 24px;
+      height: 24px;
+      text-align: center;
+      line-height: 24px;
+      margin-left: 5px;
+    }
+  }
+}

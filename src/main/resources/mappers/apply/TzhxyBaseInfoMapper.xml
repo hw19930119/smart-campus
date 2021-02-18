@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunsharing.smartcampus.mapper.apply.TzhxyBaseInfoMapper">
+    <sql id="Base_Column_List">
+        DECLARE_ID, PC_NO, UNIT_CODE, SCHOOL_NAME, SCHOOL_TYPE, SCHOOL_TYPE_NAME, STAR_LEVEL,
+        XZQH, `STATE`, LAST_STATE, CONTACT_ADDRESS, POST_CODE, SCHOOL_WEBSITE, SHCOOL_XZ,
+        SHCOOL_PHONE, LD_NAME, LD_ZW, LD_PHONE, LD_DZYX, LXR_NAME, LXR_ZW, LXR_PHONE, LXR_DZYX,
+        SBZD, STUDENT_COUNT, FACULTY_COUNT, CLASS_COUNT, GJJS_COUNT, COMMIT_TIME, CREATE_TIME,
+        CREATE_PERSON, UPDATE_TIME, UPDATE_PERSON, PC_STATE, DEL
+    </sql>
+    <select id="queryFirstForUnitCode" resultType="com.sunsharing.smartcampus.model.pojo.apply.TzhxyBaseInfo">
+      SELECT
+        *
+      FROM T_ZHXY_BASEINFO
+      WHERE DEL = '0'
+      AND UNIT_CODE = #{unitCode}
+      ORDER BY CREATE_TIME DESC LIMIT 1
+    </select>
+
+    <select id="selectVoById" resultType="com.sunsharing.smartcampus.model.vo.apply.BaseInfoVo">
+        SELECT
+        <include refid="Base_Column_List"></include>
+        FROM T_ZHXY_BASEINFO
+        WHERE DEL = '0' AND DECLARE_ID = #{businessKey}
+    </select>
+
+    <select id="querySystemConfigBackEndTime" resultType="java.util.Map">
+        SELECT SYS_BACK_ENDTIME AS endTime,SYS_BACK_MARK AS backMack FROM T_ZHXY_SYS LIMIT 1
+    </select>
+
+    <select id="queryReviewResultForBusinessKey" resultType="java.util.Map">
+          SELECT
+        (
+            SELECT
+                A.STAR_LEVEL
+            FROM
+                T_SCF_STAR_LEVEL A
+            WHERE
+                A.STAR_LEVEL IS NOT NULL
+            AND A.BUSSINESS_KEY = #{businessKey,jdbcType=VARCHAR}
+            ORDER BY
+                CREATE_TIME DESC
+            LIMIT 1
+        ) AS starLevel,
+        (
+            SELECT
+                A.AV_SCORE
+            FROM
+                T_SCF_STAR_LEVEL A
+            WHERE
+                A.AV_SCORE IS NOT NULL
+            AND A.BUSSINESS_KEY = #{businessKey,jdbcType=VARCHAR}
+            ORDER BY
+                CREATE_TIME DESC
+            LIMIT 1
+        ) AS avScore;
+    </select>
+
+    <update id="updateBatchJcssPlaceOnfile">
+      UPDATE T_ZHXY_JCSS
+        SET PC_STATE = #{pcState,jdbcType=VARCHAR}
+        WHERE DECLARE_ID IN (
+          SELECT
+           DECLARE_ID
+          FROM T_ZHXY_BASEINFO
+        WHERE PC_NO = #{pcNo,jdbcType=VARCHAR}
+         AND DEL = '0')
+    </update>
+
+    <update id="updateSysConfigMack">
+      UPDATE T_ZHXY_SYS SET SYS_BACK_MARK = '1';
+    </update>
+</mapper>

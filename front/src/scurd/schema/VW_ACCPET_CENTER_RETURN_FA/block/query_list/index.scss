@@ -1,0 +1,30 @@
+/*!
+ * @(#) index.scss
+ * 版权声明 厦门畅享信息技术有限公司, 版权所有 违者必究
+ *
+ * <br> Copyright:  Copyright (c) 2020
+ * <br> Company:厦门畅享信息技术有限公司
+ * <br> @author Administrator
+ * <br> 2020-11-18 17:08:21
+ */
+
+:global{
+  .query-VW_ACCPET_CENTER_RETURN_FA{
+    .panel-head .right-box{
+      .ui-list-horizontal li{
+        background: #09d!important;
+        color:#fff;
+        height: 30px;
+        margin-top: 3px;
+        border-radius: 4px;
+        .btn{
+          top: -3px;
+          color:#fff;
+         &:hover{
+            color:#fff!important;
+          }
+        }
+      }
+    }
+  }
+}

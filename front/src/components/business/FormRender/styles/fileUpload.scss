@@ -1,0 +1,67 @@
+/*!
+ * @(#) fileUpload.scss
+ * 版权声明 厦门畅享信息技术有限公司, 版权所有 违者必究
+ *
+ * <br> Copyright:  Copyright (c) 2020
+ * <br> Company:厦门畅享信息技术有限公司
+ * <br> @author liuce
+ * <br> 2020-05-15 11:25:24
+ */
+
+.fileUpload {
+  width:100%;
+  .fileNames {
+    margin-bottom: 10px;
+
+    + :global(.ui-fileupload) {
+      //margin-top: -10px;
+      margin-right: 10px;
+    }
+  }
+
+  .name {
+    color: #09d;
+  }
+
+  .fileTemplate {
+    position: relative;
+    top: -10px;
+  }
+
+  .deleteBtn {
+    font-size: 14px;
+    font-style: normal;
+    cursor: pointer;
+    margin-left: 5px;
+    color:red;
+  }
+  .disabledBtn{
+    border:1px solid #d0d1d4!important;
+    border-radius: 5px;
+    color:#404348!important;
+    background-color:#f7f8f9!important;
+  }
+
+  .fileUploadBtn {
+    & + input {
+      pointer-events: none;
+    }
+  }
+  .fileItem{
+    border: 1px solid #d0d1d4;
+    padding: 5px 5px 5px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin:5px 0;
+    border-radius: 4px;
+    .name{
+      width:90%;
+    }
+  }
+  .fileType{
+    font-size:12px;
+    word-break: break-all;
+    margin-left:110px;
+  }
+}

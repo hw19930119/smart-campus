@@ -1,0 +1,15 @@
+:global{
+  .add-T_ZHXY_TEMPLATE_FA{
+    .tipWrap {
+      #TEMPLATE_NAME{
+        max-width: 100%!important;
+      }
+      .Select{
+        max-width: 100%!important;
+        .Select-control{
+          max-width:100%!important;
+        }
+      }
+    }
+  }
+}

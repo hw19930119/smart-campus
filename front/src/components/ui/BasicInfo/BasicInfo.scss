@@ -1,0 +1,51 @@
+:global{
+    .BasicInfo {
+        background: #fff;
+        width: 100%;
+        padding: 15px;
+        >div >div >div{
+            margin-bottom: 15px;
+        }
+        .add-T_ZHXY_BASEINFO_FA,.add-T_ZHXY_JCSS_FA{
+            .breadcrumb{
+                display: none;
+            }
+            .pull-right{
+                width: 100%;
+                text-align: center;
+                .btn{
+                    margin: 0 10px;
+                    width: 120px!important;
+                    height: 34px!important;
+                    line-height: 33px!important;
+                    &:first-child,&:nth-child(2){
+                        display: none;
+                    }
+                }
+            }
+            .form-table{
+                border: 1px solid #ddd;
+                .item.blanktr{
+                    display: none;
+                }
+                th{
+                    width: 200px!important;
+                    text-align: right;
+                    background: none;
+                    .labelItem{
+                        width: 200px!important;
+                        height: 50px;
+                        background-color: #f7f8f9;
+                    }
+
+                }
+                td{
+                    .tipWrap > input {
+                        max-width: 400%!important;
+                    }
+                }
+            }
+        }
+
+    }
+}

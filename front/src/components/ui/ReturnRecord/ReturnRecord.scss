@@ -1,0 +1,23 @@
+@import '../../../assets/sass/variables';
+:global{
+  .return-record{
+      table{
+        width:100%;
+        th,td{
+          text-align: center;
+          padding:8px;
+          border:1px solid rgba(0,0,0,.2)
+        }
+        th{
+          background: $color-gray;
+          color:$color-light-black;
+          font-weight: normal;
+        }
+        td{
+          background: $color-fff;
+          color:#404348;
+          word-break: break-all;
+        }
+      }
+  }
+}

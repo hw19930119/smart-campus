@@ -1,0 +1,47 @@
+server:
+  port: 8080
+  context-path: /smart-campus
+  servlet:
+    session:
+      timeout: 120m
+  tomcat:
+    uri-encoding: UTF-8
+spring:
+  aop:
+    proxy-target-class: true
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+      force-response: true
+  messages:
+    encoding: UTF-8
+  profiles:
+    include: "datasource,share-config"
+  redis:
+    database: 0
+    host: 192.168.0.51
+    port: 6379
+    password:
+    #password: sunsharing_135!#%
+    cache_name: smart-campus-cache
+    timeout: 1800
+    pool:
+      max-idle: 8
+      min-idle: 0
+      max-active: 8
+      max-wait: 1
+      max-total: 8
+logging:
+    level:
+      root: info
+      com.sunsharing.smartcampus.mapper: debug
+      org.apache.ibatis: info
+      httpclient.wire: info
+      rg.apache.commons.httpclient: info
+mybatis:
+    # spring boot集成mybatis的方式打印sql
+    configuration:
+      #log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+      map-underscore-to-camel-case: true

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.sunsharing.spire:spire.doc:1.0.0-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/sunsharing/spire/spire.doc/1.0.0-SNAPSHOT/spire.doc-1.0.0-20200807.020329-1.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/sunsharing/spire/spire.doc/1.0.0-SNAPSHOT/spire.doc-1.0.0-20200807.020329-1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/sunsharing/spire/spire.doc/1.0.0-SNAPSHOT/spire.doc-1.0.0-20200807.020329-1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

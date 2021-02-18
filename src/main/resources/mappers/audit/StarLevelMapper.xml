@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunsharing.smartcampus.mapper.audit.StarLevelMapper">
+    <select id="listStarLevel" resultType="hashmap">
+        SELECT
+            a.AV_SCORE,
+            a.REVIEW_MATERIALS,
+            a.STAR_LEVEL,
+            b.STAR_LEVEL_LABEL,
+            b.AV_SCORE_LABEL
+        FROM
+            T_SCF_STAR_LEVEL a
+            INNER JOIN T_SCF_PDNODE b ON b.NODE_ID = a.NODE_ID
+        WHERE
+            a.BUSSINESS_KEY = #{businessKey,jdbcType=VARCHAR} AND a.DEL='0'
+        ORDER BY b.SEQ_NUM ASC
+    </select>
+    <select id="expertPoint" resultType="hashmap">
+        SELECT
+            a.AV_SCORE,
+            b.AV_SCORE_LABEL
+        FROM
+            T_SCF_STAR_LEVEL a
+            INNER JOIN T_SCF_PDNODE b ON b.NODE_ID = a.NODE_ID
+        WHERE
+            a.BUSSINESS_KEY = #{businessKey,jdbcType=VARCHAR} AND a.DEL='0'
+        AND b.NODE_IDENTIFIER='3'
+    </select>
+</mapper>

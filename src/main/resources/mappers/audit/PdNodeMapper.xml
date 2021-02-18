@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunsharing.smartcampus.mapper.audit.PdNodeMapper">
+    <select id="getNodeAll" resultType="hashmap">
+        SELECT
+            t1.PI_ID,
+            t1.BUSSINESS_KEY,
+            t1.COMMIT_TIME,
+            t2.AUDIT_TIME,
+            t2.NODE_ID NODE_ID,
+            t2.RESULT RESULT_ID,
+            ( SELECT y.MC0000 FROM DM_RESULT y WHERE y.BH0000 = t2.RESULT ) RESULT,
+            ( SELECT y.MC0000 FROM DM_BIZ_RESULT y WHERE y.BH0000 = t2.BIZ_RESULT ) BIZ_RESULT,
+            t3.NODE_NAME,
+            ( SELECT s.NAME FROM T_SC_AUDIT_USER s WHERE s.ID = t2.AUDIT_USER_ID ) USER_NAME,
+            (case when t3.NODE_IDENTIFIER = '2' and t2.RESULT='11' THEN CONCAT(t2.OPINON,'(专家:',(SELECT GROUP_CONCAT(b.NAME separator '、') FROM T_SCF_NODE_PERSON a INNER JOIN T_SC_AUDIT_USER b ON b.ID = a.USER_ID WHERE a.PI_ID = t1.PI_ID AND a.NODE_ID=t3.NEXT_NODE_ID GROUP BY a.PI_ID),')') ELSE t2.OPINON END) OPINON,
+            ( SELECT z.NAME FROM T_SC_ROLE z WHERE z.ROLE_ID = t2.ROLE_ID ) ROLE_NAME
+        FROM
+            T_SCF_PROCINST t1
+            INNER JOIN T_SCF_AUDIT_RECORD t2 ON t2.PI_ID = t1.PI_ID
+            INNER JOIN T_SCF_PDNODE t3 ON t3.NODE_ID = t2.NODE_ID
+        WHERE
+            t1.BUSSINESS_KEY = #{businessKey,jdbcType=VARCHAR}
+        ORDER BY
+            t2.AUDIT_TIME ASC
+    </select>
+
+    <select id="getNodeLastNoPass" resultType="hashmap">
+        SELECT
+            t1.PI_ID,
+            t1.BUSSINESS_KEY,
+            t1.COMMIT_TIME,
+            t2.AUDIT_TIME,
+            ( SELECT y.MC0000 FROM DM_AUDIT y WHERE y.BH0000 = t2.RESULT ) RESULT,
+            ( SELECT x.NODE_NAME FROM T_SCF_PDNODE x WHERE x.NODE_ID = t2.NODE_ID ) NODE_NAME,
+            ( SELECT s.NAME FROM T_SC_AUDIT_USER s WHERE s.ID = t2.AUDIT_USER_ID ) USER_NAME,
+            t2.OPINON,
+            ( SELECT z.NAME FROM T_SC_ROLE z WHERE z.ROLE_ID = t2.ROLE_ID ) ROLE_NAME
+        FROM
+            T_SCF_PROCINST t1
+            INNER JOIN T_SCF_AUDIT_RECORD t2 ON t2.PI_ID = t1.PI_ID
+        WHERE
+            t1.BUSSINESS_KEY = #{businessKey,jdbcType=VARCHAR}
+            AND t2.RESULT IN ('12','13')
+            AND EXISTS(SELECT 1 FROM T_ZHXY_BASEINFO WHERE STATE IN('13','18','21','24','25','26','27') AND DECLARE_ID = t1.BUSSINESS_KEY)
+        ORDER BY
+            t2.AUDIT_TIME DESC
+        LIMIT 1
+    </select>
+</mapper>

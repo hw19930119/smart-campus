@@ -1,0 +1,50 @@
+{
+  "name": "sunsharing-scurd-mobile",
+  "version": "1.0.1",
+  "eslintConfig": {
+    "extends": "react-app",
+    "rules": {
+      "no-undef": "off",
+      "no-restricted-globals": "off",
+      "no-unused-vars": "off"
+    }
+  },
+  "scripts": {
+    "start": "sharekit server",
+    "build": "sharekit build",
+    "build-analyze": "cross-env NODE_ENV=production sharekit build --analyze",
+    "lint": "eslint --ext .js src > eslintErrorLog.txt"
+  },
+  "devDependencies": {
+    "@yo/eslint-config-sunsharing": "^1.2.3",
+    "@yo/share-kit": "^0.14.0",
+    "babel-plugin-dva-hmr": "^0.3.2",
+    "babel-plugin-import": "^1.12.0",
+    "chalk": "1.1.3",
+    "cross-env": "^5.2.0",
+    "exports-loader": "^0.7.0",
+    "imports-loader": "^0.8.0"
+  },
+  "dependencies": {
+    "@share/bundle": "^2.0.0",
+    "@share/datagrid": "^2.2.2",
+    "@share/form-render": "^0.0.23",
+    "@share/scurd": "3.0.284",
+    "@share/shareui": "2.25.1",
+    "@share/shareui-form": "^1.7.0",
+    "@share/ulynlist": "^6.0.3",
+    "@share/utils": "^1.0.6",
+    "antd": "^3.2.3",
+    "classnames": "^2.2.5",
+    "dva": "2.1.0",
+    "echarts": "^4.8.0",
+    "fr-generator": "^0.3.1",
+    "jquery": "^3.3.1",
+    "nprogress": "^0.2.0",
+    "react": "^16.8.6",
+    "react-custom-scrollbars": "^4.2.1",
+    "react-dom": "^16.8.6",
+    "react-to-print": "^2.10.0",
+    "reactcss": "^1.2.3"
+  }
+}

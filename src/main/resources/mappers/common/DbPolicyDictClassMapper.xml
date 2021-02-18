@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  ~ @(#) DbPolicyDictClassMapper.xml
+  ~ 版权声明 厦门畅享信息技术有限公司, 版权所有 违者必究
+  ~
+  ~ <br> Copyright:  Copyright (c) 2020
+  ~ <br> Company:厦门畅享信息技术有限公司
+  ~ <br> @author hanjb
+  ~ <br> 2020-07-21 19:41:13
+  -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.sunsharing.smartcampus.mapper.common.DbPolicyDictClassMapper">
+
+    <sql id="Base_Column_List">
+        CLASS_EN_NAME,
+        CLASS_CN_NAME,
+        ZXBS,
+        SORT,
+        CREATE_TIME,
+        CREATE_USER_ID,
+        UPDATE_TIME,
+        UPDATE_USER_ID
+    </sql>
+
+    <select id="findAllList" parameterType="com.sunsharing.smartcampus.model.pojo.common.DictClass"
+            resultType="com.sunsharing.smartcampus.model.pojo.common.DictClass">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM T_POLICY_DICT_CLASS
+        WHERE ZXBS = '0'
+        <if test="classEnName != null and classEnName != '' ">
+            and UPPER(CLASS_EN_NAME) = UPPER(#{classEnName,jdbcType=VARCHAR})
+        </if>
+        <if test="classCnName != null and classCnName != '' ">
+            and UPPER(CLASS_CN_NAME) = LIKE CONCAT('%', CONCAT(UPPER(#{classCnName,jdbcType=VARCHAR}), '%'))
+        </if>
+    </select>
+
+    <update id="updateStateById">
+        UPDATE T_POLICY_DICT_CLASS
+        <if test="zxbs!=null and zxbs== 1">
+            set ZXBS ='0'
+        </if>
+
+        <if test="zxbs!=null and zxbs == 0">
+            set ZXBS ='1'
+        </if>
+        where CLASS_ID=#{dictId}
+    </update>
+
+</mapper>

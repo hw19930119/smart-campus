@@ -1,0 +1,97 @@
+@import "../../../../assets/sass/base";
+
+:global{
+  .no-data{
+    padding: 30px 0;
+    text-align: center;
+    background: #fff;
+  }
+  .index-allocation {
+    //padding: 40px 12px 0;
+    background: $gray-background;
+    //max-width: 1280px;
+    min-width:1024px;
+    max-width: 1382px;
+    margin: 12px auto;
+    .tab-content{
+      background: #fff;
+      padding:0 0 20px 20px!important;
+    }
+    .zb-con{
+      @include flex(row,space-between,flex-start);
+      flex-wrap: nowrap;
+      border-bottom:1px solid #ddd;
+      .tree-con{
+        width: 50%;
+        padding-top:10px;
+        >div>div>div{
+          >div{
+            margin-top:0;
+          }
+          >ul{
+            margin-top: 0;
+          }
+        }
+      }
+      .zb-content{
+        width: 49%;
+        background: #fff;
+        .panel{
+          margin: 0!important;
+           .panel-head {
+             background: #f8f8f9;
+             border-bottom: 1px solid #ddd;
+             h3{
+               font-size: 12px;
+               color: #323538;
+               font-weight: 800;
+             }
+           }
+          .panel-body{
+            padding: 15px;
+          }
+        }
+      }
+    }
+
+    .nav-tabs{
+      background: $color-fff;
+    }
+    .breadcrumb-icon{
+      display: none;
+    }
+    .pull-right{
+      padding-right:15px;
+    }
+    ::-webkit-scrollbar
+    {
+      width: 5px;
+      height: 5px;
+      background-color: #d0d1d4;
+    }
+
+    /* 垂直滚动条的滑动块 */
+    ::-webkit-scrollbar-thumb:vertical {
+      -webkit-box-shadow: inset 0 0 6px rgba(153, 153, 153,1);
+      background-color: #d0d1d4;
+    }
+    /* 横向滚动条的滑动块 */
+    ::-webkit-scrollbar-thumb:horizontal{
+      -webkit-box-shadow: inset 0 0 6px rgba(153, 153, 153,1);
+      background-color: #d0d1d4;
+
+    }
+    * { touch-action: pan-y; }
+  }
+  .allocation-add{
+    .form-wrap .item .sub-item .text-tip .fa{
+      top:-1px;
+    }
+  }
+  @media screen and (max-width: 1399px) and (min-width: 1166px){
+    .index-allocation{
+      width: 1148px;
+    }
+  }
+
+}

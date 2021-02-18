@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunsharing.smartcampus.mapper.audit.HomePageMapper">
+    <select id="countAuditByUser" resultType="hashmap">
+        SELECT
+	    (SELECT COUNT(1) FROM T_ZHXY_BASEINFO c WHERE c.DEL = '0' AND PC_STATE = '1'
+	        AND EXISTS(SELECT 1 FROM T_SCF_PROCINST a INNER JOIN T_SCF_TODO_DONE b ON  a.PI_ID=b.PI_ID AND b.TYPE='0' WHERE a.BUSSINESS_KEY = c.DECLARE_ID AND b.ROLE_ID=#{roleId,jdbcType=VARCHAR})
+            <if test="xzqh != null and xzqh != ''">
+                AND c.XZQH=#{xzqh}
+            </if >) awaitAudit,
+	    (SELECT COUNT(1) FROM T_ZHXY_BASEINFO c WHERE c.DEL = '0' AND PC_STATE = '1'
+	        AND EXISTS(SELECT 1 FROM T_SCF_PROCINST a INNER JOIN T_SCF_TODO_DONE b ON  a.PI_ID=b.PI_ID AND b.TYPE='1' WHERE a.BUSSINESS_KEY = c.DECLARE_ID AND b.ROLE_ID=#{roleId,jdbcType=VARCHAR})
+            <if test="xzqh != null and xzqh != ''">
+                AND c.XZQH=#{xzqh}
+            </if >) alreadyAudit
+
+    </select>
+    <select id="countAuditExpertByUser" resultType="hashmap">
+        SELECT
+        (SELECT COUNT(1) FROM T_ZHXY_BASEINFO c WHERE c.DEL = '0' AND PC_STATE = '1'
+        AND EXISTS(SELECT 1 FROM T_SCF_PROCINST a INNER JOIN T_SCF_PERSON_TODO_DONE b ON  a.PI_ID=b.PI_ID AND b.TYPE='0' WHERE a.BUSSINESS_KEY = c.DECLARE_ID AND b.USER_ID=#{userId,jdbcType=VARCHAR})) awaitAudit,
+        (SELECT COUNT(1) FROM T_ZHXY_BASEINFO c WHERE c.DEL = '0' AND PC_STATE = '1'
+        AND EXISTS(SELECT 1 FROM T_SCF_PROCINST a INNER JOIN T_SCF_PERSON_TODO_DONE b ON  a.PI_ID=b.PI_ID AND b.TYPE='1' WHERE a.BUSSINESS_KEY = c.DECLARE_ID AND b.USER_ID=#{userId,jdbcType=VARCHAR})) alreadyAudit
+
+    </select>
+
+    <select id="countAlreadyAuditByNode" resultType="hashmap">
+        SELECT
+        (SELECT COUNT(1) FROM T_ZHXY_BASEINFO a WHERE PC_STATE = '1' AND a.DEL = '0'
+        <if test="xzqh != null and xzqh != ''">
+            AND a.XZQH=#{xzqh}
+        </if >
+        AND EXISTS(SELECT 1 FROM T_SCF_PROCINST b INNER JOIN T_SCF_AUDIT_RECORD c ON c.PI_ID = b.PI_ID INNER JOIN T_SC_ROLE d ON d.ROLE_ID = c.ROLE_ID AND d.`CODE`='qjyj' WHERE  b.BUSSINESS_KEY = a.DECLARE_ID)) districtEducation,
+        (SELECT COUNT(1) FROM T_ZHXY_BASEINFO a WHERE PC_STATE = '1' AND a.DEL = '0'
+        <if test="xzqh != null and xzqh != ''">
+            AND a.XZQH=#{xzqh}
+        </if >
+        AND EXISTS(SELECT 1 FROM T_SCF_PROCINST b INNER JOIN T_SCF_AUDIT_RECORD c ON c.PI_ID = b.PI_ID INNER JOIN T_SC_ROLE d ON d.ROLE_ID = c.ROLE_ID AND d.`CODE`='zj' WHERE  b.BUSSINESS_KEY = a.DECLARE_ID)) expert,
+        (SELECT COUNT(1) FROM T_ZHXY_BASEINFO a WHERE PC_STATE = '1' AND a.DEL = '0'
+        <if test="xzqh != null and xzqh != ''">
+            AND a.XZQH=#{xzqh}
+        </if >
+        AND EXISTS(SELECT 1 FROM T_SCF_PROCINST b INNER JOIN T_SCF_AUDIT_RECORD c ON c.PI_ID = b.PI_ID INNER JOIN T_SC_ROLE d ON d.ROLE_ID = c.ROLE_ID AND d.`CODE`='slzx' INNER JOIN T_SCF_PDNODE e ON e.NODE_ID=c.NODE_ID AND e.NODE_IDENTIFIER = '4' WHERE  b.BUSSINESS_KEY = a.DECLARE_ID)) acceptCenter,
+        (SELECT COUNT(1) FROM T_ZHXY_BASEINFO a WHERE PC_STATE = '1' AND a.DEL = '0'
+        <if test="xzqh != null and xzqh != ''">
+            AND a.XZQH=#{xzqh}
+        </if >
+        AND EXISTS(SELECT 1 FROM T_SCF_PROCINST b INNER JOIN T_SCF_AUDIT_RECORD c ON c.PI_ID = b.PI_ID INNER JOIN T_SC_ROLE d ON d.ROLE_ID = c.ROLE_ID AND d.`CODE`='sjyj' WHERE b.BUSSINESS_KEY = a.DECLARE_ID)) cityEducation
+    </select>
+
+    <select id="countAuditAll" resultType="hashmap">
+        SELECT
+            (SELECT COUNT(1) FROM T_ZHXY_BASEINFO e WHERE e.DEL='0'
+                <if test="pcState != null and pcState != ''">
+                    AND e.PC_STATE = '1'
+                </if >
+                <if test="pcNo != null and pcNo != ''">
+                    AND e.PC_NO=#{pcNo}
+                </if >
+                <if test="year != null and year != ''">
+                    AND e.COMMIT_TIME LIKE '${year}%'
+                </if >
+            AND EXISTS(SELECT 1 FROM T_SCF_PROCINST f WHERE f.BUSSINESS_KEY=e.DECLARE_ID) ) allAudit,
+            (SELECT COUNT(1) FROM T_ZHXY_BASEINFO g WHERE g.DEL='0'
+                <if test="pcState != null and pcState != ''">
+                    AND g.PC_STATE = '1'
+                </if >
+                <if test="pcNo != null and pcNo != ''">
+                    AND g.PC_NO=#{pcNo}
+                </if >
+                <if test="year != null and year != ''">
+                    AND g.COMMIT_TIME LIKE '${year}%'
+                </if >
+            AND EXISTS(SELECT 1 FROM T_SCF_PROCINST h WHERE h.BUSSINESS_KEY=g.DECLARE_ID AND h.FINAL_RESULT='11')) passAudit,
+            (SELECT COUNT(1) FROM T_ZHXY_BASEINFO i WHERE i.DEL='0'
+                <if test="pcState != null and pcState != ''">
+                    AND i.PC_STATE = '1'
+                </if >
+                <if test="pcNo != null and pcNo != ''">
+                    AND i.PC_NO=#{pcNo}
+                </if >
+                <if test="year != null and year != ''">
+                    AND i.COMMIT_TIME LIKE '${year}%'
+                </if >
+            AND EXISTS(SELECT 1 FROM T_SCF_PROCINST j WHERE j.BUSSINESS_KEY=i.DECLARE_ID AND j.FINAL_RESULT='12') ) noPassAudit,
+            (SELECT COUNT(1) FROM T_ZHXY_BASEINFO k WHERE k.DEL='0'
+                <if test="pcState != null and pcState != ''">
+                    AND k.PC_STATE = '1'
+                </if >
+                <if test="pcNo != null and pcNo != ''">
+                    AND k.PC_NO=#{pcNo}
+                </if >
+                <if test="year != null and year != ''">
+                    AND k.COMMIT_TIME LIKE '${year}%'
+                </if >
+            AND EXISTS(SELECT 1 FROM T_SCF_PROCINST l WHERE l.BUSSINESS_KEY=k.DECLARE_ID AND l.FINAL_RESULT='10') ) awaitAudit
+    </select>
+    <select id="countAuditPassStar" resultType="hashmap">
+        SELECT
+	        (SELECT COUNT(1) FROM T_ZHXY_BASEINFO a WHERE a.DEL='0' AND a.STATE='23' AND STAR_LEVEL='1'
+                <if test="pcState != null and pcState != ''">
+                    AND a.PC_STATE = '1'
+                </if >
+                <if test="pcNo != null and pcNo != ''">
+                    AND a.PC_NO=#{pcNo}
+                </if >
+                <if test="year != null and year != ''">
+                    AND a.COMMIT_TIME LIKE '${year}%'
+                </if >) oneStar,
+            (SELECT COUNT(1) FROM T_ZHXY_BASEINFO a WHERE a.DEL='0' AND a.STATE='23' AND STAR_LEVEL='2'
+                <if test="pcState != null and pcState != ''">
+                    AND a.PC_STATE = '1'
+                </if >
+                <if test="pcNo != null and pcNo != ''">
+                    AND a.PC_NO=#{pcNo}
+                </if >
+                <if test="year != null and year != ''">
+                    AND a.COMMIT_TIME LIKE '${year}%'
+                </if >) twoStar,
+	        (SELECT COUNT(1) FROM T_ZHXY_BASEINFO a WHERE a.DEL='0' AND a.STATE='23' AND STAR_LEVEL='3'
+                <if test="pcState != null and pcState != ''">
+                    AND a.PC_STATE = '1'
+                </if >
+                <if test="pcNo != null and pcNo != ''">
+                    AND a.PC_NO=#{pcNo}
+                </if >
+                <if test="year != null and year != ''">
+                    AND a.COMMIT_TIME LIKE '${year}%'
+                </if >) threeStar,
+            (SELECT COUNT(1) FROM T_ZHXY_BASEINFO a WHERE a.DEL='0' AND a.STATE='23' AND STAR_LEVEL='4'
+                <if test="pcState != null and pcState != ''">
+                    AND a.PC_STATE = '1'
+                </if >
+                <if test="pcNo != null and pcNo != ''">
+                    AND a.PC_NO=#{pcNo}
+                </if >
+                <if test="year != null and year != ''">
+                    AND a.COMMIT_TIME LIKE '${year}%'
+                </if >) fourStar,
+            (SELECT COUNT(1) FROM T_ZHXY_BASEINFO a WHERE a.DEL='0' AND a.STATE='23' AND STAR_LEVEL='5'
+                <if test="pcState != null and pcState != ''">
+                    AND a.PC_STATE = '1'
+                </if >
+                <if test="pcNo != null and pcNo != ''">
+                    AND a.PC_NO=#{pcNo}
+                </if >
+                <if test="year != null and year != ''">
+                    AND a.COMMIT_TIME LIKE '${year}%'
+                </if >) fiveStar
+    </select>
+
+    <select id="countAuditPassByXzqh" resultType="hashmap">
+        SELECT
+            (SELECT COUNT(1) FROM T_ZHXY_BASEINFO a WHERE a.STATE='23' AND a.DEL='0'
+                <if test="pcState != null and pcState != ''">
+                    AND a.PC_STATE = '1'
+                </if >
+                <if test="pcNo != null and pcNo != ''">
+                    AND a.PC_NO=#{pcNo}
+                </if >
+                <if test="year != null and year != ''">
+                    AND a.COMMIT_TIME LIKE '${year}%'
+                </if >
+                <if test="xzqh != null and xzqh != ''">
+                    AND a.XZQH=#{xzqh}
+                </if >
+        AND EXISTS (SELECT 1 FROM T_SCF_STAR_LEVEL b INNER JOIN T_SCF_PDNODE c ON c.NODE_ID = b.NODE_ID AND c.NODE_IDENTIFIER='3' WHERE b.BUSSINESS_KEY = a.DECLARE_ID  AND b.AV_SCORE &gt;= 100 AND b.AV_SCORE &lt; 120)) one,
+            (SELECT COUNT(1) FROM T_ZHXY_BASEINFO a WHERE a.STATE='23' AND a.DEL='0'
+                <if test="pcState != null and pcState != ''">
+                    AND a.PC_STATE = '1'
+                </if >
+                <if test="pcNo != null and pcNo != ''">
+                    AND a.PC_NO=#{pcNo}
+                </if >
+                <if test="year != null and year != ''">
+                    AND a.COMMIT_TIME LIKE '${year}%'
+                </if >
+                <if test="xzqh != null and xzqh != ''">
+                    AND a.XZQH=#{xzqh}
+                </if >
+        AND EXISTS (SELECT 1 FROM T_SCF_STAR_LEVEL b INNER JOIN T_SCF_PDNODE c ON c.NODE_ID = b.NODE_ID AND c.NODE_IDENTIFIER='3' WHERE b.BUSSINESS_KEY = a.DECLARE_ID  AND b.AV_SCORE &gt;= 120 AND b.AV_SCORE &lt; 140)) two,
+            (SELECT COUNT(1) FROM T_ZHXY_BASEINFO a WHERE a.STATE='23' AND a.DEL='0'
+                <if test="pcState != null and pcState != ''">
+                    AND a.PC_STATE = '1'
+                </if >
+                <if test="pcNo != null and pcNo != ''">
+                    AND a.PC_NO=#{pcNo}
+                </if >
+                <if test="year != null and year != ''">
+                    AND a.COMMIT_TIME LIKE '${year}%'
+                </if >
+                <if test="xzqh != null and xzqh != ''">
+                    AND a.XZQH=#{xzqh}
+                </if >
+        AND EXISTS (SELECT 1 FROM T_SCF_STAR_LEVEL b INNER JOIN T_SCF_PDNODE c ON c.NODE_ID = b.NODE_ID AND c.NODE_IDENTIFIER='3' WHERE b.BUSSINESS_KEY = a.DECLARE_ID  AND b.AV_SCORE &gt;= 140 AND b.AV_SCORE &lt; 160)) three,
+            (SELECT COUNT(1) FROM T_ZHXY_BASEINFO a WHERE a.STATE='23' AND a.DEL='0'
+                <if test="pcState != null and pcState != ''">
+                    AND a.PC_STATE = '1'
+                </if >
+                <if test="pcNo != null and pcNo != ''">
+                    AND a.PC_NO=#{pcNo}
+                </if >
+                <if test="year != null and year != ''">
+                    AND a.COMMIT_TIME LIKE '${year}%'
+                </if >
+                <if test="xzqh != null and xzqh != ''">
+                    AND a.XZQH=#{xzqh}
+                </if >
+        AND EXISTS (SELECT 1 FROM T_SCF_STAR_LEVEL b INNER JOIN T_SCF_PDNODE c ON c.NODE_ID = b.NODE_ID AND c.NODE_IDENTIFIER='3' WHERE b.BUSSINESS_KEY = a.DECLARE_ID  AND b.AV_SCORE &gt;= 160 AND b.AV_SCORE &lt; 180)) four,
+            (SELECT COUNT(1) FROM T_ZHXY_BASEINFO a WHERE a.STATE='23' AND a.DEL='0'
+                <if test="pcState != null and pcState != ''">
+                    AND a.PC_STATE = '1'
+                </if >
+                <if test="pcNo != null and pcNo != ''">
+                    AND a.PC_NO=#{pcNo}
+                </if >
+                <if test="year != null and year != ''">
+                    AND a.COMMIT_TIME LIKE '${year}%'
+                </if >
+                <if test="xzqh != null and xzqh != ''">
+                    AND a.XZQH=#{xzqh}
+                </if >
+        AND EXISTS (SELECT 1 FROM T_SCF_STAR_LEVEL b INNER JOIN T_SCF_PDNODE c ON c.NODE_ID = b.NODE_ID AND c.NODE_IDENTIFIER='3' WHERE b.BUSSINESS_KEY = a.DECLARE_ID  AND b.AV_SCORE &gt;= 180)) five
+    </select>
+
+
+    <select id="countAuditPassBySchoolType" resultType="hashmap">
+        SELECT a.SCHOOL_TYPE schoolType,COUNT(1) num FROM T_ZHXY_BASEINFO a WHERE a.STATE = '23' AND a.DEL='0'
+            <if test="pcState != null and pcState != ''">
+                AND a.PC_STATE = '1'
+            </if >
+            <if test="pcNo != null and pcNo != ''">
+                AND a.PC_NO=#{pcNo}
+            </if >
+            <if test="year != null and year != ''">
+                AND a.COMMIT_TIME LIKE '${year}%'
+            </if >
+        GROUP BY a.SCHOOL_TYPE
+    </select>
+</mapper>

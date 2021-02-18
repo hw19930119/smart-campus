@@ -1,0 +1,25 @@
+@import '../../../assets/sass/base';
+:global{
+    .progress-con {
+        .progress-table{
+            width: 100%;
+            .progress-table-title{
+                background: #f8f8f9;
+                th{
+                    color: $color333;
+                    font-weight: normal;
+                }
+            }
+            tr>th,tr>td{
+                height: 38px;
+                text-align: center;
+                border-bottom: 1px solid #ebeced;
+                padding:5px;
+                &:last-child{
+                    width: 25%;
+                    max-width:300px;
+                }
+            }
+        }
+    }
+}

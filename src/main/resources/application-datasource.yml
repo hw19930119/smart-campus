@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    smart:
+      campus:
+        url: jdbc:mysql://192.168.0.59:3306/SMART_CAMPUS?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+        driverClassName: com.mysql.jdbc.Driver
+        username: root
+        password: sunsharing_DDK
+        initialSize: 10
+        minIdle: 10
+        maxActive: 50
+        maxWait: 60000
+        validationQuery: 'SELECT 1 FROM DUAL'
+        testOnBorrow: false
+        testWhileIdle: true
+        poolPreparedStatements: false

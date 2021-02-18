@@ -1,0 +1,190 @@
+/*
+ * @(#) SelfEvaluation.scss
+ * 版权声明 厦门畅享信息技术有限公司, 版权所有 违者必究
+ *
+ * <br> Copyright:  Copyright (c) 2019
+ * <br> Company:厦门畅享信息技术有限公司
+ * <br> @author liuxia
+ * <br> 2020/7/29 14:56
+ */
+@import "../../../assets/sass/base";
+:global{
+  .no-data{
+    padding-top:15px;
+  }
+  .self-evaluation{
+    font-size: 12px;
+    &.audit-evaluation{
+      .disableImg___3vVgq{
+        display: none;
+      }
+      .fileUpload___GXLEY .disabledBtn___2zD7N{
+        display: none;
+      }
+    }
+    &.preview-evaluation{
+      .ant-tree-title{
+        .title-con{
+          .icon{
+            display: none;
+          }
+        }
+      }
+    }
+    .evaluation-title{
+      >.panel-head{
+        padding-left:20px;
+      }
+      >.panel-body{
+        padding-top:0;
+        padding-right:0;
+      }
+    }
+  }
+  .zb-con{
+    @include flex(row,space-between,flex-start);
+    flex-wrap: wrap;
+    background: $color-fff;
+    border-bottom: 1px solid #ddd;
+    overflow: hidden;
+    .tree-con{
+      width: 37.03%;
+      border-right: 1px solid #ddd;
+      padding-bottom: 10000px;
+      margin-bottom: -10000px;
+      overflow-y: hidden;
+      .score-types{
+        background: $color-fff;
+        margin-top:0;
+        padding:0;
+        @include flex(row,flex-start,flex-start);
+        li{
+          @include flex(row,flex-start,center);
+          margin-right:15px;
+          font-size: $font-size-normal;
+          color:$color-light-black;
+          span{
+            width:12px;
+            height:12px;
+            margin-right:5px;
+          }
+          &:nth-child(1){
+            span{
+              background: $color-light-black;
+            }
+          }
+          &:nth-child(2){
+            span{
+              background:$color-blue;
+            }
+          }
+        }
+      }
+      .ant-tree li .ant-tree-node-content-wrapper .tree-text{
+        max-width:90%;
+      }
+    }
+    .zb-content{
+      flex:1;
+      background: #fff;
+      max-height:800px;
+      overflow-y: auto;
+      .catergory-title{
+        padding:8px 10px;
+        background-color: $color-gray;
+        margin-bottom:21px;
+        color:$color-light-black;
+        border-bottom: 1px solid #ddd;
+        font-weight: 800;
+      }
+      .form-list{
+        .fr-label-object{
+          .fr-label-title{
+            display: none;
+          }
+        }
+        .fr-label-title{
+          color:$color-light-black;
+          font-size: 12px;
+          font-weight: normal;
+          line-height: 1.5;
+        }
+        //.fr-field{
+        //  margin-bottom: 0;
+        //}
+      }
+      .form-wrap{
+        margin-top:10px;
+        padding-left:1rem;
+        width:91.5%;
+      }
+      .image-uploader .iu-item{
+         width:100px;
+         height:100px;
+      }
+      .evaluation-deal{
+        position: relative;
+        margin-top:-24px;
+        .panel-head{
+          background: $color-gray;
+          border-bottom: 1px solid $color-ddd;
+          h3{
+            font-size: $font-size-normal;
+            color:$color-light-black!important;
+            font-weight: 800;
+          }
+
+        }
+        .panel-body{
+          padding:21px 20px;
+        }
+        .allocation-add{
+          margin-top:10px;
+        }
+        .form-wrap .form-table>tbody{
+          &>tr{
+            display: flex;
+            flex-direction: column;
+            th{
+              background-color:transparent;
+              width: 136px;
+              .labelItem{
+                width: 100%;
+                padding-right:12px;
+                padding-left:0;
+                text-align: left;
+                color:$color-light-black;
+                &:after{
+                  right:auto;
+                }
+              }
+            }
+            td{
+              .sub-item{
+                padding-left: 8px;
+                padding-right:6px;
+                .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control{
+                  background: $color-gray!important;
+                }
+              }
+            }
+            th,td{
+              border-bottom: none;
+              border-top: none;
+            }
+          }
+        }
+        .return-record{
+          margin-top:11px;
+        }
+        &.expert-deal{
+          margin-top: -15px;
+          .checkBox.state-disabled, .radioBox.state-disabled{
+            color: #404348!important;
+            opacity: 1 !important;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,92 @@
+:global{
+  .modal-box-modal{
+    .file-lists{
+      margin:10px 0 0 0!important;
+      list-style: none;
+      padding:0;
+      .file-item{
+        list-style: none;
+        padding: 2px 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 5px 0;
+        a{
+          color:#09d;
+        }
+      }
+    }
+  }
+  .evaluation-modal{
+    .modal-dialog{
+      width:90%;
+      height:90%;
+      min-width:800px;
+      min-height: 550px;
+      .modal-content{
+        height: 100%;
+        .modal-body{
+          height: 84%;
+          padding:10px;
+          overflow-y: auto;
+          .evaluation-detail{
+            .content{
+              overflow: hidden;
+            }
+          }
+          .self-evaluation{
+            height:100%;
+          }
+          .panel{
+            height:100%;
+            .panel-body{
+              height:100%;
+            }
+          }
+          .zb-con{
+            border-break: none;
+            height: 100%;
+            .tree-con{
+              height: 100%;
+              >div{
+                height:100%;
+                >div{
+                  height:100%;
+                  >div{
+                    height:100%;
+                    .ant-tree{
+                      max-height: 86%;
+                    }
+                  }
+
+                }
+              }
+            }
+            .zb-content{
+              max-height: 100%;
+            }
+          }
+        }
+
+      }
+    }
+    ::-webkit-scrollbar
+    {
+      width: 5px;
+      height: 5px;
+      background-color: rgba(208, 209, 212, 0.5);
+    }
+
+    /* 垂直滚动条的滑动块 */
+    ::-webkit-scrollbar-thumb:vertical {
+      -webkit-box-shadow: inset 0 0 6px rgba(153, 153, 153,1);
+      background-color: rgba(208, 209, 212, 0.5);
+    }
+    /* 横向滚动条的滑动块 */
+    ::-webkit-scrollbar-thumb:horizontal{
+      -webkit-box-shadow: inset 0 0 6px rgba(153, 153, 153,1);
+      background-color: rgba(208, 209, 212, 0.5);
+
+    }
+  }
+}

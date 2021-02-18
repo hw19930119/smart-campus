@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunsharing.smartcampus.mapper.audit.ApplyUserMapper">
+
+    <select id="getApplyUserByIdNum" resultType="com.sunsharing.smartcampus.model.vo.audit.ApplyUserVo"
+            parameterType="java.lang.String">
+        SELECT
+        au.ID, au.NAME, au.ID_NUM, au.MOBILE_NUM, au.UNIT_CODE, au.MATERIAL, au.STATE, au.CREATE_TIME, au.REVIEW_TIME, au.REVIEW_PERSON,
+        au.OPINION, au.UPDATE_TIME, au.DEL,
+        sc.SCHOOL_NAME, sc.CITY_BELONG, sc.XZQH, sc.SCHOOL_TYPE, sc.SCHOOL_TYPE_NAME
+        FROM T_SC_APPLY_USER au
+        LEFT JOIN T_ZHXY_SCHOOL sc on sc.UNIT_CODE=au.UNIT_CODE
+        WHERE (
+        (au.ID_NUM=#{idNum,jdbcType=VARCHAR} AND au.STATE='A03')
+        OR au.ID=#{userId,jdbcType=VARCHAR}
+        )
+        AND au.del='0'
+    </select>
+    <select id="getApplyUserVoByUserId" resultType="com.sunsharing.smartcampus.model.vo.audit.ApplyUserVo"  parameterType="java.lang.String">
+        SELECT
+        au.ID, au.NAME, au.ID_NUM, au.MOBILE_NUM, au.UNIT_CODE, au.MATERIAL, au.STATE, au.CREATE_TIME, au.REVIEW_TIME, au.REVIEW_PERSON,
+        au.OPINION, au.UPDATE_TIME, au.DEL,
+        sc.SCHOOL_NAME, sc.CITY_BELONG, sc.XZQH, sc.SCHOOL_TYPE, sc.SCHOOL_TYPE_NAME
+        FROM T_SC_APPLY_USER au
+        LEFT JOIN T_ZHXY_SCHOOL sc on sc.UNIT_CODE=au.UNIT_CODE
+        WHERE au.ID=#{userId,jdbcType=VARCHAR}
+        AND au.del='0'
+    </select>
+
+    <update id="updateTzhxySchool">
+      UPDATE
+       T_ZHXY_SCHOOL
+      SET
+        SCHOOL_TYPE = #{schoolVo.schoolType} ,
+        SCHOOL_TYPE_NAME = #{schoolVo.schoolTypeName}
+      WHERE UNIT_CODE = #{schoolVo.unitCode}
+    </update>
+
+    <select id="queryLoginUser" resultType="com.sunsharing.smartcampus.model.vo.apply.ApplyLoginUser">
+        SELECT
+        au.ID, au.NAME, au.ID_NUM, au.MOBILE_NUM, au.UNIT_CODE,au.SCHOOL_TYPE, au.SCHOOL_TYPE_NAME, au.MATERIAL, au.STATE, au.CREATE_TIME,
+        au.REVIEW_TIME, au.REVIEW_PERSON, au.OPINION AS opinion, au.UPDATE_TIME, au.DEL,
+          sc.SCHOOL_NAME,sc.CITY_BELONG, sc.XZQH
+        FROM T_SC_APPLY_USER au
+        LEFT JOIN T_ZHXY_SCHOOL sc on sc.UNIT_CODE=au.UNIT_CODE
+        WHERE au.ID_NUM=#{idNum,jdbcType=VARCHAR}
+        AND au.del = '0'
+    </select>
+
+    <select id="queryForSbSwitch" resultType="java.lang.String">
+      SELECT SYS_SWITCH FROM T_ZHXY_SYS LIMIT 1
+    </select>
+
+
+</mapper>

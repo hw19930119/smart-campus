@@ -1,0 +1,36 @@
+/*!
+ * @(#) style.scss
+ * 版权声明 厦门畅享信息技术有限公司, 版权所有 违者必究
+ *
+ * <br> Copyright:  Copyright (c) 2020
+ * <br> Company:厦门畅享信息技术有限公司
+ * <br> @author Administrator
+ * <br> 2020-11-01 16:24:58
+ */
+@import '../../../assets/sass/base';
+:global{
+  .list-groups{
+    flex-direction: column;
+    padding:0;
+    .panel{
+      width:100%;
+      .expert-list{
+        @include flex(column,flex-start,center);
+        .ant-checkbox-group{
+          @include flex(row,flex-start,center);
+          width:100%;
+          flex-wrap: wrap;
+          margin-bottom:20px;
+          .ant-checkbox-wrapper{
+            width:25%;
+            margin-bottom:15px;
+          }
+        }
+        .ant-checkbox-wrapper + .ant-checkbox-wrapper{
+          margin-left: 0;
+        }
+      }
+    }
+
+  }
+}

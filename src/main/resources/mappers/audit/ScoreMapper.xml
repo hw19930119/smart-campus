@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sunsharing.smartcampus.mapper.audit.ScoreMapper">
+
+    <select id="queryCategoryIdScoreList" resultType="com.sunsharing.smartcampus.model.vo.audit.ScoreVo">
+        select
+        score.ID, score.BUSSINESS_KEY, score.CATEGORY_ID, score.FIELD_CONTENT, score.ZP_SCORE, score.OPINION, score.STATE, score.GIVE_BACK, score.AUDIT_TIME, score.AUDIT_PERSON, score.AUDIT_ROLE, score.CREATE_TIME, score.UPDATE_TIME, score.HISTORY_FLAG, score.DEL,
+        r.NAME roleName,au.NAME AUDIT_PERSON_NAME
+        FROM T_SCF_SCORE score
+        LEFT JOIN T_SC_ROLE r on r.ROLE_ID=score.AUDIT_ROLE
+        LEFT JOIN T_SC_AUDIT_USER au on au.ID=score.AUDIT_PERSON
+        WHERE score.BUSSINESS_KEY=#{bussinessKey,jdbcType=VARCHAR}
+        AND score.CATEGORY_ID=#{categoryId,jdbcType=VARCHAR}
+        <if test="onlyGiveBackStr != null">
+            AND score.GIVE_BACK=#{onlyGiveBackStr,jdbcType=VARCHAR}
+            AND score.HISTORY_FLAG='0'
+        </if>
+        AND score.DEL='0'
+        ORDER BY score.CREATE_TIME ASC
+    </select>
+    <select id="getAllIndexPinjiaByUser" resultType="com.sunsharing.smartcampus.model.vo.filed.FieldValueVo">
+        SELECT
+            fv.ID, fv.CATEGORY_ID, fv.FIELD_CONTENT, fv.CREATE_TIME, fv.CREATE_PERSON, fv.UPDATE_TIME, fv.UPDATE_PERSON, fv.DEL, fv.DECLARE_ID, fv.ZP_SCORE, fv.STATE, fv.MESSAGE,
+            score.ZP_SCORE OTHER_SCORE,score.GIVE_BACK
+        FROM
+            T_FIELD_VALUE fv
+            LEFT JOIN T_SCF_SCORE score ON score.CATEGORY_ID=fv.CATEGORY_ID AND score.BUSSINESS_KEY=fv.DECLARE_ID
+                                        AND score.DEL='0' AND score.HISTORY_FLAG='0'
+                                        <if test="userId != null">
+                                            AND score.AUDIT_PERSON=#{userId,jdbcType=VARCHAR}
+                                        </if>
+                                        <if test="roleId != null">
+                                            AND score.AUDIT_ROLE=#{roleId,jdbcType=VARCHAR}
+                                        </if>
+        WHERE fv.DEL='0'
+        AND fv.DECLARE_ID=#{bussinessKey,jdbcType=VARCHAR}
+    </select>
+    <select id="queryExpertIndexScoreList" resultType="com.sunsharing.smartcampus.model.vo.audit.ScoreVo">
+        select
+		    score.CATEGORY_ID,cId.CATEGORY_NAME as indexName,SUM(score.ZP_SCORE) sumScore,COUNT(score.CATEGORY_ID) countScore,SUM(score.ZP_SCORE)/COUNT(score.CATEGORY_ID) AS avScore
+        FROM T_SCF_SCORE score
+        LEFT JOIN T_CATEGORY_CONFIG cId on cId.ID=score.CATEGORY_ID
+        WHERE score.BUSSINESS_KEY=#{bussinessKey,jdbcType=VARCHAR}
+        AND score.DEL='0'
+        AND score.HISTORY_FLAG='0'
+        AND score.ZP_SCORE IS NOT NULL
+        AND score.AUDIT_ROLE=(SELECT ROLE_ID FROM T_SC_ROLE WHERE CODE='zj')
+        GROUP BY score.CATEGORY_ID
+    </select>
+</mapper>
